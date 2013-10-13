@@ -1,36 +1,69 @@
+
 /**
  * Module dependencies.
  */
-var express = require('express');
-var fs = require('fs');
 var logger = require('mean-logger');
-
 /**
  * Main application entry file.
  * Please note that the order of loading is important.
  */
+var pjson = require('./package.json');
 
 //Load configurations
 //if test env, load example file
-var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-var config = require('./config/config');
+var env = process.env.NODE_ENV = pjson.env || 'dev';
+
+var express = require('express');
+var pathChecker = require('./server/pathChecker.js');
+var app = module.exports = express();
+var fs = require('fs');
 
 
-var app = express();
+app.configure(function(){
+    app.set('port', process.env.PORT || pjson.port);
+    app.set('showStackError', true);
 
-//express settings
-require('./config/express')(app, passport);
+    //Should be placed before express.static
+    app.use(express.compress({
+        filter: function(req, res) {
+            return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
+        },
+        level: 9
+    }));
 
-//Bootstrap routes
-require('./config/routes')(app, passport, auth);
+    //Setting the fav icon and static folder
+    app.use(express.favicon());
+    app.use(express.bodyParser());
+    app.use(express.methodOverride());
+    app.use(app.router);
+});
 
-//Start the app by listening on <port>
-var port = config.port;
-app.listen(port);
-console.log('Express app started on port ' + port);
+//
+//process.on('uncaughtException', function(err) {
+//    console.log(err);
+//});
 
-//Initializing logger
-logger.init(app, passport, mongoose);
+var server = app.listen(app.get('port'), function () {
 
-//expose app
-exports = module.exports = app;
+    app.get('*', function(req, res){
+        var pathName = req._parsedUrl.pathname;
+        var filePath = './public' + pathName;
+        fs.exists(filePath, function (exists)
+        {
+            if(exists)
+            {
+                res.sendfile(filePath);
+            } else {
+                if(pathChecker(pathName)){
+                    res.sendfile('./public/index.html');
+                } else {
+                    res.status(404);
+                    res.sendfile('./public/index.html');
+                }
+            }
+
+        });
+
+    });
+    console.info("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});

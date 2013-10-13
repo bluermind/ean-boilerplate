@@ -1,6 +1,6 @@
 # EAN Stack
 
-EAN is a boilerplate that provides a nice starting point for [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), and [AngularJS](http://angularjs.org/) based applications. It is designed to give you quick and organized way to start developing of MEAN based web apps with useful modules like mongoose and passport pre-bundled and configured. We mainly try to take care of the connection points between existing popular frameworks and solve common integration problems.  
+EAN is a boilerplate that provides a nice starting point for [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), and [AngularJS](http://angularjs.org/) based applications. It is designed to give you quick and organized way to start developing of MEAN based web apps with useful modules like mongoose and passport pre-bundled and configured. We mainly try to take care of the connection points between existing popular frameworks and solve common integration problems.
 
 ## Prerequisites
 * Node.js - Download and Install [Node.js](http://www.nodejs.org/download/). You can also follow [this gist](https://gist.github.com/isaacs/579814) for a quick and easy way to install Node.js
@@ -9,12 +9,12 @@ EAN is a boilerplate that provides a nice starting point for [Node.js](http://ww
 ### Global packages Prerequisites
 
 * Bower - Web package manager, installing [Bower](http://bower.io/) is simple when you have npm:
- 
+
 ```
 $ npm install -g bower
 ```
 * Grunt - The JavaScript Task Runner, Download and Install [Grunt](http://gruntjs.com) also through npm:
- 
+
 ```
 $ npm install -g grunt-cli
 ```
@@ -24,6 +24,12 @@ $ npm install -g grunt-cli
 * AngularJS - Defined as bower module in the [bower.json](bower.json) file.
 * Twitter Bootstrap - Included in the project, because we want to be able to overwrite it easily.
 * UI Bootstrap - Defined as bower module in the [bower.json](bower.json) file.
+
+## Build enviroment
+There are two preset build environments: "dev", "production"
+Which one is used for build determines the "env" field in package.json.
+* "dev" should be used for development- it won't minify and won't strip livereload script
+* "production" should be used for production-everything get's minified, livereload is removed from index.html
 
 ## Quick Install
   The quickest way to get started with MEAN is to clone the project and utilize it like this:
@@ -35,11 +41,11 @@ $ npm install -g grunt-cli
   We recommend using [Grunt](https://github.com/gruntjs/grunt-cli) to start the server:
 
     $ grunt
-    
+
   When not using grunt you can use:
 
     $ node server
-    
+
   Then open a browser and go to:
 
     http://localhost:8000
@@ -81,7 +87,7 @@ Bower Clean Cache:
 $ bower cache clean
 ```
 
- 
+
 ## Configuration
 All configuration is specified in the [config](config/) folder, particularly the [config.js](config/config.js) file and the [env](config/env/) files. Here you will need to specify your application name, database name, as well as hook up any social app keys if you want integration with Twitter, Facebook, GitHub or Google.
 

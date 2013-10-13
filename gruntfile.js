@@ -1,39 +1,93 @@
 module.exports = function(grunt) {
     // Project Configuration
+    var concatJSFile = 'public/built/<%= pkg.name %>-<%= pkg.version %>.js';
+    var pkgJSON = grunt.file.readJSON('package.json');
+    var env = pkgJSON.env;
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
+        pkg: pkgJSON,
         watch: {
-            jade: {
-                files: ['app/views/**'],
-                options: {
-                    livereload: true,
-                },
+            options: {
+                livereload: true
             },
-            js: {
-                files: ['public/js/**', 'app/**/*.js'],
-                tasks: ['jshint'],
-                options: {
-                    livereload: true,
-                },
+            files: ['public/**/*.html'],
+            compile: {
+                files: ['public/**/*.js', '!public/lib'],
+                tasks: [] //TODO add tasks
             },
-            html: {
-                files: ['public/views/**'],
-                options: {
-                    livereload: true,
-                },
+            less: {
+                files: 'public/less/**/*.less',
+                tasks: ['less:' + env]
             },
-            css: {
-                files: ['public/css/**'],
+            replace: {
+                files: 'src/resource/index.html',
+                tasks: ['replace:indexMain']
+            },
+            manifest: {
+                files: 'src/loadOrder.js',
+                tasks: ['smg']
+            },
+            JSfileAddedDeleted: {
+                files: 'src/js/**/*.js',
+                tasks: ['smg'],
                 options: {
-                    livereload: true
+                    event: ['added', 'deleted']
+                }
+            },
+            bower: {
+                files: 'bower.json',
+                tasks: ['clean']
+            }
+        },
+        cssmin: {
+
+        },
+        karma: {
+            unit: {
+                configFile: 'karma.conf.js',
+                singleRun: true
+            }
+        },
+        uglify: {
+            dist: {
+                files: {
+                    'public/built/<%= pkg.name %>-<%= pkg.version %>.min.js': concatJSFile
                 }
             }
         },
-        jshint: {
-            all: ['gruntfile.js', 'public/js/**/*.js', 'test/**/*.js', 'app/**/*.js']
+        replace: {
+            production: {
+                src: 'public/index_build_template.html',
+                dest: 'public/index.html',
+                replacements: [
+                    {
+                        from: '<--built css-->',
+                        to: '<%= pkg.name %>-<%= pkg.version %>.min.css'
+                    },
+                    {
+                        from: '<script src="http://localhost:35729/livereload.js"></script>',
+                        to: ''
+                    }
+                ]
+            },
+            dev: {
+                src: 'public/index_build_template.html',
+                dest: 'public/index.html',
+                replacements: [
+                    {
+                        from: '<--built css-->',
+                        to: '<%= pkg.name %>-<%= pkg.version %>.css'
+                    }
+                ]
+            }
+        },
+        less: {
+            dev: {
+                src:  './public/less/bootstrap.less',
+                dest: './public/built/<%= pkg.name %>-<%= pkg.version %>.css'
+            }
         },
         nodemon: {
-            dev: {
+            production: {
                 options: {
                     file: 'server.js',
                     args: [],
@@ -41,7 +95,7 @@ module.exports = function(grunt) {
                     watchedExtensions: ['js'],
                     watchedFolders: ['app', 'config'],
                     debug: true,
-                    delayTime: 1,
+                    delayTime: 2,
                     env: {
                         PORT: 3000
                     },
@@ -50,31 +104,31 @@ module.exports = function(grunt) {
             }
         },
         concurrent: {
-            tasks: ['nodemon', 'watch'], 
+            tasks: ['nodemon', 'watch'],
             options: {
                 logConcurrentOutput: true
             }
-        },
-        mochaTest: {
-            options: {
-                reporter: 'spec'
-            },
-            src: ['test/**/*.js']
         }
     });
+    var compile = ['less', 'replace'];
 
-    //Load NPM tasks 
+    compile.forEach(function (step, i) {
+       compile[i] = step + ':' + env;
+    });
+
+    //Load NPM tasks
+    grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-text-replace');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-mocha-test');
     grunt.loadNpmTasks('grunt-nodemon');
     grunt.loadNpmTasks('grunt-concurrent');
 
     //Making grunt default to force in order not to break the project.
-    grunt.option('force', true);
+//    grunt.option('force', true);
 
     //Default task(s).
-    grunt.registerTask('default', ['jshint', 'concurrent']);
+    grunt.registerTask('default', ['concurrent']);
+    grunt.registerTask('compile', compile);
 
     //Test task.
     grunt.registerTask('test', ['mochaTest']);

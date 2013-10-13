@@ -4,3 +4,7 @@
 node_modules/
 public/lib
 config/secrets
+
+public/built
+public/index.html
+config/secrets.js

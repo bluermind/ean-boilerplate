@@ -1,40 +1,43 @@
 {
-    "name": "ean-boilerplate",
-    "description": "EAN - A Modern Stack: ExpressJS, AngularJS, NodeJS.",
-    "version": "1.0.0",
-    "private": false,
-    "author": "Jiri Spac",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/capaj/ean-boilerplate.git"
-    },
-    "engines": {
-        "node": "0.10.x",
-        "npm": "1.2.x"
-    },
-    "scripts": {
-        "start": "node node_modules/grunt-cli/bin/grunt",
-        "test": "node node_modules/grunt-cli/bin/grunt test",
-        "postinstall": "bower install"
-    },
-    "dependencies": {
-		"array-sugar": "latest",
-		"express": "latest",
-		"async": "latest",
-		"prerender-node": "latest",
-        "mean-logger": "latest",
-        "forever": "latest",
-        "bower": "latest",
-        "grunt": "latest",
-        "grunt-cli": "latest"
-    },
-    "devDependencies": {
-        "supertest": "latest",
-        "should": "latest",
-        "grunt-contrib-watch": "latest",
-        "grunt-contrib-jshint": "latest",
-        "grunt-nodemon": "latest",
-        "grunt-concurrent": "latest",
-        "grunt-mocha-test": "latest"
-    }
+  "name": "ean-boilerplate",
+  "description": "EAN - A Modern Stack: ExpressJS, AngularJS, NodeJS.",
+  "version": "0.0.1",
+  "private": false,
+  "author": "Jiri Spac",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/capaj/ean-boilerplate.git"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "scripts": {
+    "start": "node node_modules/grunt-cli/bin/grunt",
+    "test": "node node_modules/grunt-cli/bin/grunt test",
+    "postinstall": "bower install"
+  },
+  "env": "dev",
+  "port": 8080,
+  "dependencies": {
+    "array-sugar": "latest",
+    "express": "latest",
+    "async": "latest",
+    "prerender-node": "latest",
+    "mean-logger": "latest",
+    "forever": "latest",
+    "grunt-contrib-concat": "latest",
+    "grunt-text-replace": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-contrib-less": "latest",
+    "grunt-contrib-jshint": "latest",
+    "grunt-nodemon": "latest",
+    "grunt-concurrent": "latest",
+    "grunt-contrib-copy": "latest",
+    "grunt": "latest",
+    "lodash": "latest"
+  },
+  "devDependencies": {
+    "grunt-karma": "latest"
+  }
 }
