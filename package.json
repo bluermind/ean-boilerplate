@@ -1,12 +1,12 @@
 {
-    "name": "mean",
-    "description": "MEAN - A Modern Stack: MongoDB, ExpressJS, AngularJS, NodeJS. (BONUS: Passport User Support).",
+    "name": "ean-boilerplate",
+    "description": "EAN - A Modern Stack: ExpressJS, AngularJS, NodeJS.",
     "version": "1.0.0",
     "private": false,
-    "author": "Amos Haviv",
+    "author": "Jiri Spac",
     "repository": {
         "type": "git",
-        "url": "https://github.com/linnovate/mean.git"
+        "url": "https://github.com/capaj/ean-boilerplate.git"
     },
     "engines": {
         "node": "0.10.x",
@@ -18,20 +18,10 @@
         "postinstall": "bower install"
     },
     "dependencies": {
-        "express": "latest",
-        "jade": "latest",
-        "mongoose": "latest",
-        "connect-mongo": "latest",
-        "connect-flash": "latest",
-        "passport": "latest",
-        "passport-local": "latest",
-        "passport-facebook": "latest",
-        "passport-twitter": "latest",
-        "passport-github": "latest",
-        "passport-google-oauth": "latest",
-        "underscore": "latest",
-        "async": "latest",
-        "view-helpers": "latest",
+		"array-sugar": "latest",
+		"express": "latest",
+		"async": "latest",
+		"prerender-node": "latest",
         "mean-logger": "latest",
         "forever": "latest",
         "bower": "latest",
