@@ -112,8 +112,11 @@ If you are using node instead of grunt, it is very similar:
 > NOTE: Running Node.js applications in the __production__ environment enables caching, which is disabled by default in all other environments.
 
 ## Getting Started
-* TODO write intro tutorial  
-  
+* TODO write intro tutorial
+
+## Target browsers
+* this stack targets anything than IE9, inluding IE9. If you need to run on IE8 or older, this boilerplate is not for you.
+
 ## More Information
   * Contact Jiří Špác on any issue via [E-Mail](mailto:capajj@gmail.com), [Facebook](http://www.facebook.com/capaj), or [Twitter](http://www.twitter.com/capajj).
 

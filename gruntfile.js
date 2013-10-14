@@ -112,8 +112,8 @@ module.exports = function(grunt) {
     });
     var compile = ['less', 'replace'];
 
-    compile.forEach(function (step, i) {
-       compile[i] = step + ':' + env;
+    compile = compile.map(function (step) {
+       return step + ':' + env;
     });
 
     //Load NPM tasks
