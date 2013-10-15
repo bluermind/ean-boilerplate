@@ -99,24 +99,9 @@ $ bower cache clean
 All configuration is specified in the [config](config/) folder, particularly the [config.js](config/config.js) file and the [env](config/env/) files. Here you will need to specify your application name, database name, as well as hook up any social app keys if you want integration with Twitter, Facebook, GitHub or Google.
 
 ### Environmental Settings
+TODO write up on settings
 
-There are three environments provided by default, __development__, __test__, and __production__. Each of these environments has the following configuration options:
-* __db__ - This is the name of the MongoDB database to use, and is set by default to __mean-dev__ for the development environment.
-* __app.name__ - This is the name of your app or website, and can be different for each environment. You can tell which environment you are running by looking at the TITLE attribute that your app generates.
-* __Social OAuth Keys__ - Facebook, GitHub, Google, Twitter. You can specify your own social application keys here for each platform:
-	* __clientID__
-	* __clientSecret__
-	* __callbackURL__
-
-To run with a different environment, just specify NODE_ENV as you call grunt:
-
-	$ NODE_ENV=test grunt
-
-If you are using node instead of grunt, it is very similar:
-
-	$ NODE_ENV=test node server
-
-> NOTE: Running Node.js applications in the __production__ environment enables caching, which is disabled by default in all other environments.
+To run with a different environment, just rewrite "env" in package.json to the enviroment you want.
 
 ## Getting Started
 * TODO write intro tutorial
@@ -125,7 +110,7 @@ If you are using node instead of grunt, it is very similar:
   * Contact Jiří Špác on any issue via [E-Mail](mailto:capajj@gmail.com), [Facebook](http://www.facebook.com/capaj), or [Twitter](http://www.twitter.com/capajj).
 
 ## Credits
-Forked from mean.io project.
+Forked from mean.io project, also inspired by ng-boilerplate.
 
 ## License
 (The MIT License)
