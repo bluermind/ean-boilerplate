@@ -26,7 +26,7 @@
         "prerender-node": "latest",
         "mean-logger": "latest",
         "forever": "latest",
-        "grunt-ngmin": "latest",
+        "grunt-ng-annotate": "latest",
         "grunt-contrib-uglify": "latest",
         "grunt-contrib-concat": "latest",
         "grunt-contrib-watch": "latest",

@@ -1,4 +1,12 @@
-window.app = angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', 'mean.system', 'mean.articles']);
+window.app = angular.module('app',
+    [
+        'ui.bootstrap', 'ui.route', 'ngTouch'
+        // included, but by default not loaded, if you need it, just add it to script manifest
+        // 'angular-gestures'
+    ]
+).app.config(
+    function($locationProvider) {
+        $locationProvider.html5Mode(true);  //Setting HTML5 Location Mode
+    }
+);
 
-angular.module('mean.system', []);
-angular.module('mean.articles', []);

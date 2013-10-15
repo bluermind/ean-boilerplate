@@ -1,6 +1,13 @@
 # EAN Stack
 
 EAN is a boilerplate that provides a nice starting point for [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), and [AngularJS](http://angularjs.org/) based applications. It is designed to give you quick and organized way to start developing of MEAN based web apps with useful modules like mongoose and passport pre-bundled and configured. We mainly try to take care of the connection points between existing popular frameworks and solve common integration problems.
+## Philosophy
+Opinionated stack perfect for building large and small angular apps
+
+### Target browsers
+* this stack targets anything newer than IE9, inluding IE9. If you need to run on IE8 or older, this boilerplate is not for you.
+* stack assumes, that the app will be used on mobiles and tablets and includes
+angular-touch and angular-gestures to make mobile experience that much better
 
 ## Prerequisites
 * Node.js - Download and Install [Node.js](http://www.nodejs.org/download/). You can also follow [this gist](https://gist.github.com/isaacs/579814) for a quick and easy way to install Node.js
@@ -113,9 +120,6 @@ If you are using node instead of grunt, it is very similar:
 
 ## Getting Started
 * TODO write intro tutorial
-
-## Target browsers
-* this stack targets anything than IE9, inluding IE9. If you need to run on IE8 or older, this boilerplate is not for you.
 
 ## More Information
   * Contact Jiří Špác on any issue via [E-Mail](mailto:capajj@gmail.com), [Facebook](http://www.facebook.com/capaj), or [Twitter](http://www.twitter.com/capajj).
