@@ -39,23 +39,23 @@ Which one is used for build determines the "env" field in package.json.
 * "production" should be used for production-everything get's minified, livereload is removed from index.html
 
 ## Quick Install
-  The quickest way to get started with MEAN is to clone the project and utilize it like this:
+  The quickest way to get started with EAN is to clone the project and then:
 
-  Install dependencies:
+  1.Install dependencies:
 
     $ npm install
 
-  We recommend using [Grunt](https://github.com/gruntjs/grunt-cli) to start the server:
+  2. Use [Grunt](https://github.com/gruntjs/grunt-cli) to compile and start the server:
 
     $ grunt
 
-  When not using grunt you can use:
+    It is worth noting, that on "production" setting default grunt task is running just `grunt compile` not the server itself
 
-    $ node server
+  3. Then open a browser and go to:
 
-  Then open a browser and go to:
+    http://localhost:8080
 
-    http://localhost:8000
+    8080 is default port specified in config-dev.json
 
 
 ## Troubleshooting
