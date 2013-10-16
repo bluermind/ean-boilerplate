@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     var env = pkgJSON.env;
     var SM = require('./public/script-manifest.js');
     var mainFileName = 'main-' + env + '-<%= pkg.version %>.js';
-    var concTasks;
+    var appScripts = 'public/js/**/*.js';
 
     var mainReplacement = [{
         from: '<--built script manifest-->',
@@ -20,7 +20,7 @@ module.exports = function(grunt) {
             },
             files: ['public/**/*.html'],
             compile: {
-                files: ['public/**/*.js', '!public/lib'],
+                files: [appScripts, '!public/lib'],
                 tasks: ['concat', 'uglify'] //TODO add tasks
             },
             less: {
@@ -28,15 +28,15 @@ module.exports = function(grunt) {
                 tasks: ['less:' + env]
             },
             replace: {
-                files: 'src/resource/index.html',
-                tasks: ['replace:indexMain']
+                files: 'public/index_build_template.html',
+                tasks: ['replace:' + env]
             },
             manifest: {
                 files: 'public/script-manifest.js',
                 tasks: ['smg']
             },
             JSfileAddedDeleted: {
-                files: 'public/js/**/*.js',
+                files: appScripts,
                 tasks: ['smg'],
                 options: {
                     event: ['added', 'deleted']
@@ -44,11 +44,14 @@ module.exports = function(grunt) {
             },
             bower: {
                 files: 'bower.json',
-                tasks: ['clean']
+                tasks: []
             }
         },
-        cssmin: {
-
+        concat: {
+            app: {
+                src: SM.concat,
+                dest: concatJSFile
+            }
         },
         smg:{   //generates main.js
             mainInit: {
