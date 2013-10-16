@@ -4,20 +4,28 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <title></title>
     <link rel="stylesheet" href="/built/ean-boilerplate-0.0.1.css" type='text/css'>
     <link rel="shortcut icon" href="/img/icons/favicon.ico">
-    <link rel="apple-touch-icon" sizes="57x57" href="/img/apple/apple-touch-icon-57x57-precomposed.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="/img/apple/apple-touch-icon-72x72-precomposed.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="/img/apple/apple-touch-icon-114x114-precomposed.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="/img/apple/apple-touch-icon-144x144-precomposed.png" />
-    <link rel="apple-touch-startup-image" media="screen and (max-device-width: 320px)" href="/img/apple/splash.png">
-    <link rel="apple-touch-startup-image" media="(max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)" href="/img/apple/splash2x.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="/img/icons/app-icon-57x57-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="/img/icons/app-icon-72x72-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="/img/icons/app-icon-114x114-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="144x144" href="/img/icons/app-icon-144x144-precomposed.png"/>
+    <link rel="shortcut icon" sizes="144x144" href="/img/icons/app-icon-144x144-precomposed.png">
+    <link rel="apple-touch-startup-image" media="screen and (max-device-width: 320px)" href="/img/icons/splash.png">
+    <link rel="apple-touch-startup-image" media="(max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)" href="/img/icons/splash2x.png">
 </head>
 <body>
-
+    <!--[if lt IE 9]>
+    <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser.
+        Please <a href="http://browsehappy.com/">upgrade
+        your browser</a> to improve your experience.
+    </p>
+    <![endif]-->
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -47,6 +55,15 @@
 
     </div><!-- /.container -->
 
+    <script src="/lib/script.js/dist/script.min.js"></script>
+    <script src="/lib/angular-loader/angular-loader.min.js"></script>
+    <script src="/built/main-dev-0.0.1.js"></script>
+    <script>
+        navigator.standalone = navigator.standalone || (screen.height-document.documentElement.clientHeight<40);
+        $script.ready('scriptManifestReady', function(){
+            angular.bootstrap(document, ['app']);
+        });
+    </script>
+    <script src="http://localhost:35729/livereload.js"></script>
 </body>
-<script src="http://localhost:35729/livereload.js"></script>
 </html>

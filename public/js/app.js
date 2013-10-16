@@ -1,10 +1,12 @@
 window.app = angular.module('app',
     [
-        'ui.bootstrap', 'ui.route', 'ngTouch'
+        'ngTouch',
+        'angularMoment',
+        'angularLocalStorage'
         // included, but by default not loaded, if you need it, just add it to script manifest
         // 'angular-gestures'
     ]
-).app.config(
+).config(
     function($locationProvider) {
         $locationProvider.html5Mode(true);  //Setting HTML5 Location Mode
     }

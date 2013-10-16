@@ -3,6 +3,15 @@ module.exports = function(grunt) {
     var concatJSFile = 'public/built/<%= pkg.name %>-<%= pkg.version %>.js';
     var pkgJSON = grunt.file.readJSON('package.json');
     var env = pkgJSON.env;
+    var SM = require('./public/script-manifest.js');
+    var mainFileName = 'main-' + env + '-<%= pkg.version %>.js';
+    var concTasks;
+
+    var mainReplacement = [{
+        from: '<--built script manifest-->',
+        to: '/built/' + mainFileName
+    }];
+
     grunt.initConfig({
         pkg: pkgJSON,
         watch: {
@@ -12,7 +21,7 @@ module.exports = function(grunt) {
             files: ['public/**/*.html'],
             compile: {
                 files: ['public/**/*.js', '!public/lib'],
-                tasks: [] //TODO add tasks
+                tasks: ['concat', 'uglify'] //TODO add tasks
             },
             less: {
                 files: 'public/less/**/*.less',
@@ -23,11 +32,11 @@ module.exports = function(grunt) {
                 tasks: ['replace:indexMain']
             },
             manifest: {
-                files: 'src/loadOrder.js',
+                files: 'public/script-manifest.js',
                 tasks: ['smg']
             },
             JSfileAddedDeleted: {
-                files: 'src/js/**/*.js',
+                files: 'public/js/**/*.js',
                 tasks: ['smg'],
                 options: {
                     event: ['added', 'deleted']
@@ -40,6 +49,13 @@ module.exports = function(grunt) {
         },
         cssmin: {
 
+        },
+        smg:{   //generates main.js
+            mainInit: {
+                steps: SM[env],
+                relativeTo: 'public',  // this path will be omitted from all url paths,
+                dest: 'public/built/' + mainFileName
+            }
         },
         karma: {
             unit: {
@@ -58,7 +74,7 @@ module.exports = function(grunt) {
             production: {
                 src: 'public/index_build_template.html',
                 dest: 'public/index.html',
-                replacements: [
+                replacements: mainReplacement.concat([
                     {
                         from: '<--built css-->',
                         to: '<%= pkg.name %>-<%= pkg.version %>.min.css'
@@ -67,23 +83,36 @@ module.exports = function(grunt) {
                         from: '<script src="http://localhost:35729/livereload.js"></script>',
                         to: ''
                     }
-                ]
+                ])
             },
             dev: {
                 src: 'public/index_build_template.html',
                 dest: 'public/index.html',
-                replacements: [
+                replacements: mainReplacement.concat([
                     {
                         from: '<--built css-->',
                         to: '<%= pkg.name %>-<%= pkg.version %>.css'
+                    },
+                    {
+                        from: '<--built script manifest-->',
+                        to: mainFileName
                     }
-                ]
+                ])
             }
         },
         less: {
             dev: {
                 src:  './public/less/bootstrap.less',
                 dest: './public/built/<%= pkg.name %>-<%= pkg.version %>.css'
+            },
+            production: {
+                options: {
+                    compress: true,
+                    yuicompress: true,
+                    report: 'min'
+                },
+                src:  './public/less/bootstrap.less',
+                dest: './public/built/<%= pkg.name %>-<%= pkg.version %>.min.css'
             }
         },
         nodemon: {
@@ -115,11 +144,13 @@ module.exports = function(grunt) {
     compile = compile.map(function (step) {
        return step + ':' + env;
     });
+    compile.push('smg');
 
     //Load NPM tasks
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-text-replace');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-smg');
     grunt.loadNpmTasks('grunt-nodemon');
     grunt.loadNpmTasks('grunt-concurrent');
 
@@ -127,8 +158,14 @@ module.exports = function(grunt) {
 //    grunt.option('force', true);
 
     //Default task(s).
-    grunt.registerTask('default', ['concurrent']);
     grunt.registerTask('compile', compile);
+
+    if (env == 'dev') {
+        grunt.registerTask('default', ['compile', 'watch']);
+    }
+    if (env == 'production') {
+        grunt.registerTask('default', ['concurrent']);
+    }
 
     //Test task.
     grunt.registerTask('test', ['mochaTest']);

@@ -9,15 +9,14 @@
     "angular-sanitize": "~1.2.0",
     "angular-bootstrap": "~0.6.0",
     "angular-moment": "latest",
-    "angular-translate": "~1.1.0",
     "angularLocalStorage-nc": "latest",
     "moment": "latest",
     "array-sugar": "~0.1",
     "json3": "~3.2.4",
     "es5-shim": "~2.0.8",
-    "ng-tools": "latest",
+    "ng-tools": "~0.0.3",
     "script.js": "latest",
-    "jquery": "~2.0.3",
+    "jquery": "~latest",
     "angular-touch": "~1.2.0-rc.3",
     "angular-gestures": "~0.1.1"
   },
@@ -26,6 +25,6 @@
     "angular-scenario": "~1.2.0"
   },
   "resolutions": {
-    "angular": "1.2.0-rc.2"
+    "angular": "1.2.0-rc.3"
   }
 }

@@ -31,7 +31,7 @@
         "grunt-contrib-concat": "latest",
         "grunt-contrib-watch": "latest",
         "grunt-contrib-less": "latest",
-        "grunt-contrib-jshint": "latest",
+        "grunt-smg": "latest",
         "grunt-nodemon": "latest",
         "grunt-concurrent": "latest",
         "grunt-contrib-copy": "latest",

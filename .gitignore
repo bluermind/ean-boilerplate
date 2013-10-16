@@ -7,4 +7,4 @@ config/secrets
 
 public/built
 public/index.html
-config/secrets.js
+config/secrets.json
