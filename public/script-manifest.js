@@ -19,6 +19,7 @@ var appFiles = [
 
 var productionFiles = {
     1: [
+		'public/js/preload/*.min.js',
 		bc + 'array-sugar/array-sugar.js',
 		bc + '**/moment.min.js', bc + '**/jquery.min.js'
 	],
@@ -36,6 +37,7 @@ var productionFiles = {
 
 var devFiles = {
     1: [
+		'public/js/preload/*.js',
 		bc + 'array-sugar/array-sugar.js',
 		bc + '**/moment.js', bc + '**/jquery.min.js'
 	],

@@ -16,7 +16,7 @@
     "es5-shim": "~2.0.8",
     "ng-tools": "~0.0.3",
     "script.js": "latest",
-    "jquery": "~latest",
+    "jquery": "~2.0",
     "angular-touch": "~1.2.0-rc.3",
     "angular-gestures": "~0.1.1"
   },
