@@ -1,8 +1,7 @@
-
 var bc = 'public/lib/';
 
 var appFiles = [
-    'public/js/app.js',
+    'public/js/routes.js',
     //animations
     'public/js/animations/*.js',
     //directives
@@ -47,7 +46,8 @@ var devFiles = {
 		bc + '**/angular-moment.js',
         bc + '**/angularLocalStorage.js',
         bc + '**/angular-animate.js',
-        bc + '**/angular-route.js'
+        bc + '**/angular-route.js',
+        'public/js/app.js'
     ],
     4:  appFiles //all the concatenated files loaded asynchronously
 };

@@ -3,7 +3,7 @@
     //application routing
     exports.routes = [
         { route:'/', resolve: {templateUrl:'/templates/root.html'}},
-        { route:'/route', resolve: {templateUrl:'/templates/CREATE_NEW.html', reloadOnSearch: false}}
+        { route:'/route', resolve: {templateUrl:'/templates/root.html', reloadOnSearch: false}}
 
     ];
 

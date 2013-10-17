@@ -1,5 +1,6 @@
 window.app = angular.module('app',
     [
+        'ngRoute',
         'ngTouch',
         'angularMoment',
         'angularLocalStorage'
@@ -7,8 +8,13 @@ window.app = angular.module('app',
         // 'angular-gestures'
     ]
 ).config(
-    function($locationProvider) {
+    function($locationProvider, $routeProvider) {
         $locationProvider.html5Mode(true);  //Setting HTML5 Location Mode
+
+        routesModule.routes.forEach(function(routeDef){
+            $routeProvider.when(routeDef.route, routeDef.resolve);
+        });
+        $routeProvider.otherwise({redirectTo:'/404'});
     }
 );
 

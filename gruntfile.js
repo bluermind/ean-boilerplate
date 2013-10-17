@@ -12,16 +12,16 @@ module.exports = function(grunt) {
         to: '/built/' + mainFileName
     }];
 
-    grunt.initConfig({
+    var gCfg = {
         pkg: pkgJSON,
         watch: {
             options: {
                 livereload: true
             },
-            files: ['public/**/*.html'],
-            compile: {
+            files: ['public/**/*.html', '!public/index.html', '!public/index_build_template.html'],
+            JSSources: {
                 files: [appScripts, '!public/lib'],
-                tasks: ['concat', 'uglify'] //TODO add tasks
+                tasks: []
             },
             less: {
                 files: 'public/less/**/*.less',
@@ -141,7 +141,7 @@ module.exports = function(grunt) {
                 logConcurrentOutput: true
             }
         }
-    });
+    };
     var compile = ['less', 'replace'];
 
     compile = compile.map(function (step) {
@@ -168,7 +168,9 @@ module.exports = function(grunt) {
     }
     if (env == 'production') {
         grunt.registerTask('default', ['concurrent']);
+        gCfg.watch.JSSources.tasks = ['compile'];
     }
+    grunt.initConfig(gCfg);
 
     //Test task.
     grunt.registerTask('test', ['mochaTest']);
