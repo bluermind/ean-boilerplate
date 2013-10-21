@@ -1,4 +1,5 @@
 var bc = 'public/lib/';
+var moduleFile = 'public/js/app.js';
 
 var appFiles = [
     'public/js/routes.js',
@@ -16,6 +17,9 @@ var appFiles = [
     'public/js/controllers/*.js',
     '!public/js/**/_*.*'
 ];
+
+var forConcat = appFiles.slice(0);
+forConcat.unshift(moduleFile);
 
 var productionFiles = {
     1: [
@@ -49,14 +53,14 @@ var devFiles = {
         bc + '**/angularLocalStorage.js',
         bc + '**/angular-animate.js',
         bc + '**/angular-route.js',
-        'public/js/app.js'
+        moduleFile
     ],
     4:  appFiles //all the concatenated files loaded asynchronously
 };
 
 if (module.exports) {
     module.exports = {
-        concat: appFiles,
+        concat: forConcat,
         dev: devFiles,
         production: productionFiles
     };

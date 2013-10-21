@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
     // Project Configuration
     var concatJSFile = 'public/built/<%= pkg.name %>-<%= pkg.version %>.js';
+    var annJSFile = 'public/built/<%= pkg.name %>-<%= pkg.version %>.annotated.js';
     var pkgJSON = grunt.file.readJSON('package.json');
     var env = pkgJSON.env;
     var SM = require('./public/script-manifest.js');
@@ -16,6 +17,7 @@ module.exports = function(grunt) {
         pkg: pkgJSON,
         watch: {
             options: {
+                port: 35729,
                 livereload: true
             },
             files: ['public/**/*.html', '!public/index.html', '!public/index_build_template.html'],
@@ -47,12 +49,6 @@ module.exports = function(grunt) {
                 tasks: []
             }
         },
-        concat: {
-            app: {
-                src: SM.concat,
-                dest: concatJSFile
-            }
-        },
         smg:{   //generates main.js
             mainInit: {
                 steps: SM[env],
@@ -66,10 +62,22 @@ module.exports = function(grunt) {
                 singleRun: true
             }
         },
+        concat: {
+            app: {
+                src: SM.concat,
+                dest: concatJSFile
+            }
+        },
+        ngAnnotate: {
+            app: {
+                src: concatJSFile,
+                dest: annJSFile
+            }
+        },
         uglify: {
             dist: {
                 files: {
-                    'public/built/<%= pkg.name %>-<%= pkg.version %>.min.js': concatJSFile
+                    'public/built/<%= pkg.name %>-<%= pkg.version %>.min.js': annJSFile
                 }
             }
         },
@@ -142,17 +150,25 @@ module.exports = function(grunt) {
             }
         }
     };
+    //compile task customization
     var compile = ['less', 'replace'];
 
     compile = compile.map(function (step) {
-       return step + ':' + env;
+        return step + ':' + env;
     });
+    if (env == 'production') {
+        compile = compile.concat(['concat', 'ngAnnotate', 'uglify'])
+    }
     compile.push('smg');
+    // compile task end
 
     //Load NPM tasks
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-text-replace');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-ng-annotate');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-smg');
     grunt.loadNpmTasks('grunt-nodemon');
     grunt.loadNpmTasks('grunt-concurrent');
@@ -167,7 +183,7 @@ module.exports = function(grunt) {
         grunt.registerTask('default', ['compile', 'watch']);
     }
     if (env == 'production') {
-        grunt.registerTask('default', ['concurrent']);
+        grunt.registerTask('default', ['compile', 'nodemon']);
         gCfg.watch.JSSources.tasks = ['compile'];
     }
     grunt.initConfig(gCfg);

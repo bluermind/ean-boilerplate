@@ -36,6 +36,9 @@ app.configure(function(){
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(app.router);
+    if (env == 'production') {
+        app.use(require('prerender-node').set('prerenderServiceUrl', 'http://localhost:3000/'));
+    }
 });
 
 //
