@@ -3,6 +3,9 @@ module.exports = function(grunt) {
     var concatJSFile = 'public/built/<%= pkg.name %>-<%= pkg.version %>.js';
     var annJSFile = 'public/built/<%= pkg.name %>-<%= pkg.version %>.annotated.js';
     var pkgJSON = grunt.file.readJSON('package.json');
+	//Load all NPM tasks
+	require('load-grunt-tasks')(grunt);
+
     var env = pkgJSON.env;
     var SM = require('./public/script-manifest.js');
     var mainFileName = 'main-' + env + '-<%= pkg.version %>.js';
@@ -126,6 +129,18 @@ module.exports = function(grunt) {
                 dest: './public/built/<%= pkg.name %>-<%= pkg.version %>.min.css'
             }
         },
+		ngtemplates:  {
+			app:        {
+				options:{
+					module: 'ngTemplates',
+					prefix: '/',
+					standalone: true
+				},
+				cwd: 'public',
+				src: ['templates/directives/**.html'],
+				dest: 'public/built/ng-templates.js'
+			}
+		},
         nodemon: {
             production: {
                 options: {
@@ -162,17 +177,10 @@ module.exports = function(grunt) {
     compile.push('smg');
     // compile task end
 
-    //Load NPM tasks
-    grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-text-replace');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-ng-annotate');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-smg');
-    grunt.loadNpmTasks('grunt-nodemon');
-    grunt.loadNpmTasks('grunt-concurrent');
-
+	grunt.registerTask('test', [
+		'ngtemplates',
+		'karma:unit'
+	]);
     //Making grunt default to force in order not to break the project.
 //    grunt.option('force', true);
 
@@ -188,6 +196,4 @@ module.exports = function(grunt) {
     }
     grunt.initConfig(gCfg);
 
-    //Test task.
-    grunt.registerTask('test', ['mochaTest']);
 };
