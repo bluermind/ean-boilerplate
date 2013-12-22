@@ -106,8 +106,11 @@ To run with a different environment, just rewrite "env" in package.json to the e
 ## Getting Started
 * TODO write intro tutorial
 
+## ideal for IntelliJ Webstorm
+* TODO write intro tutorial
+
 ## More Information
-  * Contact Jiří Špác on any issue via [E-Mail](mailto:capajj@gmail.com), [Facebook](http://www.facebook.com/capaj), or [Twitter](http://www.twitter.com/capajj).
+* Contact Jiří Špác on any issue via [E-Mail](mailto:capajj@gmail.com), [Facebook](http://www.facebook.com/capaj), or [Twitter](http://www.twitter.com/capajj).
 
 ## Credits
 Forked from mean.io project, also inspired by ng-boilerplate.
