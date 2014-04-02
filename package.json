@@ -24,7 +24,7 @@
         "express": "latest",
         "async": "latest",
         "prerender-node": "latest",
-        "mean-logger": "latest",
+        "winston": "latest",
         "forever": "latest",
         "grunt-ng-annotate": "latest",
         "grunt-contrib-uglify": "latest",

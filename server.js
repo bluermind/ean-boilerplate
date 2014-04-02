@@ -2,7 +2,7 @@
 /**
  * Module dependencies.
  */
-var logger = require('mean-logger');
+var logger = require('winston');
 /**
  * Main application entry file.
  * Please note that the order of loading is important.
