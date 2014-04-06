@@ -187,12 +187,11 @@ module.exports = function(grunt) {
     //Default task(s).
     grunt.registerTask('compile', compile);
 
-    if (env == 'dev') {
-        grunt.registerTask('default', ['compile', 'watch']);
-    }
     if (env == 'production') {
         grunt.registerTask('default', ['compile', 'nodemon']);
         gCfg.watch.JSSources.tasks = ['compile'];
+    } else {
+        grunt.registerTask('default', ['compile', 'watch']);
     }
     grunt.initConfig(gCfg);
 
