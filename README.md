@@ -20,7 +20,7 @@ angular-touch and angular-gestures to make mobile experience that much better
 ```
 $ npm install -g bower
 ```
-* Grunt - The JavaScript Task Runner, Download and Install [Grunt](http://gruntjs.com) also through npm:
+* [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) - JavaScript Task Runner, download and install [Grunt](http://gruntjs.com) also through npm :
 
 ```
 $ npm install -g grunt-cli
@@ -38,24 +38,25 @@ Which one is used for build determines the "env" field in package.json.
 * "dev" should be used for development- it won't minify and won't strip livereload script
 * "production" should be used for production-everything get's minified, livereload is removed from index.html
 
-## Quick Install
+## Quick start
   The quickest way to get started with EAN is to clone the project and then:
 
-  1.Install dependencies:
-
+  1. Install dependencies:
+    
+    ```
     $ npm install
-
+    ```
   2. Use [Grunt](https://github.com/gruntjs/grunt-cli) to compile and start the server:
-
+    ```
     $ grunt
-
-    It is worth noting, that on "production" setting default grunt task is running just `grunt compile` not the server itself
-
+    ```
+      It is worth noting, that on "production" setting default grunt task is running just `grunt compile` not     the server itself
+  
   3. Then open a browser and go to:
-
-    http://localhost:8080
-
-    8080 is default port specified in config-dev.json
+  ```
+  http://localhost:8080
+  ```
+  8080 is default port specified in config-dev.json
 
 
 ## Troubleshooting
