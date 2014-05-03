@@ -6,7 +6,8 @@ module.exports = function(grunt) {
 	//Load all NPM tasks
 	require('load-grunt-tasks')(grunt);
 
-    var env = pkgJSON.env;
+    var env = grunt.option('env') || pkgJSON.env;
+
     var SM = require('./public/script-manifest.js');
     var mainFileName = 'main-' + env + '-<%= pkg.version %>.js';
     var appScripts = 'public/js/**/*.js';
@@ -18,6 +19,9 @@ module.exports = function(grunt) {
 
     var gCfg = {
         pkg: pkgJSON,
+        bower: {
+            install:{}
+        },
         watch: {
             options: {
                 port: 35729,
@@ -99,7 +103,7 @@ module.exports = function(grunt) {
                     }
                 ])
             },
-            dev: {
+            development: {
                 src: 'public/index_build_template.html',
                 dest: 'public/index.html',
                 replacements: mainReplacement.concat([
@@ -115,7 +119,7 @@ module.exports = function(grunt) {
             }
         },
         less: {
-            dev: {
+            development: {
                 src:  './public/less/bootstrap.less',
                 dest: './public/built/<%= pkg.name %>-<%= pkg.version %>.css'
             },
@@ -140,30 +144,7 @@ module.exports = function(grunt) {
 				src: ['templates/directives/**.html'],
 				dest: 'public/built/ng-templates.js'
 			}
-		},
-        nodemon: {
-            production: {
-                options: {
-                    file: 'server.js',
-                    args: [],
-                    ignoredFiles: ['README.md', 'node_modules/**', '.DS_Store'],
-                    watchedExtensions: ['js'],
-                    watchedFolders: ['app', 'config'],
-                    debug: true,
-                    delayTime: 2,
-                    env: {
-                        PORT: 3000
-                    },
-                    cwd: __dirname
-                }
-            }
-        },
-        concurrent: {
-            tasks: ['nodemon', 'watch'],
-            options: {
-                logConcurrentOutput: true
-            }
-        }
+		}
     };
     //compile task customization
     var compile = ['less', 'replace'];
@@ -188,11 +169,13 @@ module.exports = function(grunt) {
     grunt.registerTask('compile', compile);
 
     if (env == 'production') {
-        grunt.registerTask('default', ['compile', 'nodemon']);
+        grunt.registerTask('default', ['compile']);
         gCfg.watch.JSSources.tasks = ['compile'];
     } else {
         grunt.registerTask('default', ['compile', 'watch']);
     }
+    grunt.registerTask('deploy', ['bower:install', 'default']);
+
     grunt.initConfig(gCfg);
 
 };

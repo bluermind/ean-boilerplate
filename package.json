@@ -15,7 +15,7 @@
     "scripts": {
         "start": "node node_modules/grunt-cli/bin/grunt",
         "test": "node node_modules/grunt-cli/bin/grunt test",
-        "postinstall": "bower install"
+        "postinstall": "grunt deploy --env=production"
     },
     "env": "development",
     "port": 8080,
@@ -33,12 +33,12 @@
         "static-favicon": "1.0.2",
         "forever": "latest",
         "grunt-ng-annotate": "latest",
+        "grunt-bower-task": "~0.3",
         "grunt-contrib-uglify": "latest",
         "grunt-contrib-concat": "latest",
         "grunt-contrib-watch": "latest",
         "grunt-contrib-less": "latest",
         "grunt-smg": "latest",
-        "grunt-nodemon": "latest",
         "grunt-concurrent": "latest",
         "grunt-contrib-copy": "latest",
         "grunt-text-replace": "latest",

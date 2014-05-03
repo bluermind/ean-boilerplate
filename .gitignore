@@ -8,3 +8,4 @@ config/secrets
 public/built
 public/index.html
 config/secrets.json
+autodeploys
