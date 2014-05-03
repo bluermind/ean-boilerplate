@@ -1,16 +1,18 @@
-var gith = require('gith');
+var gith = require('gith').create( 9001 );
 var fs = require('fs');
-
+var pkgJSON = require('./../../package.json');
 var cp = require('child_process');
 var child = cp.fork('./../../server.js');
-var repo = 'capaj/ean-boilerplate';
+var repo = pkgJSON.repository.url.substring(19).split('.')[0];
+
+console.log('Repo: ' + repo);
+fs.mkdirSync('./../../autodeploys/');
 
 try {
     process.chdir('./../../autodeploys/');
-    console.log('Now in path: ' + process.cwd());
 }
 catch (err) {
-    console.log('chdir: ' + err);
+    console.log('chdir failed: ' + err);
 }
 
 function onNewTag( payload ) {
@@ -25,8 +27,7 @@ function onNewTag( payload ) {
 
                 cp.exec('npm install', { cwd: './' + payload.tag + '/' }, function (err, stdout, stderr) {
                     if (err) {
-                        console.error("Failed npm install for tag " + payload.tag);
-
+                        console.error("Failed npm install for tag " + payload.tag + ' error: ' + err);
                     } else {
                         console.log('npm installed, restarting');
                         child.kill();
@@ -40,12 +41,9 @@ function onNewTag( payload ) {
 
 }
 
-//gith({
-//    repo: repo,
-//    branch: 'master'
-//}).on( 'tag:add', onNewTag);
+gith({
+    repo: repo,
+    branch: 'master'
+}).on( 'tag:add', onNewTag);
 
-setTimeout(function () {
-    onNewTag({tag: '0.2.0'});
-}, 10000);
 
