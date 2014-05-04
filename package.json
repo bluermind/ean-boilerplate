@@ -14,14 +14,14 @@
     },
     "scripts": {
         "start": "node node_modules/grunt-cli/bin/grunt",
-        "test": "node node_modules/grunt-cli/bin/grunt test",
-        "postinstall": "grunt deploy --env=production"
+        "test": "node node_modules/grunt-cli/bin/grunt test"
     },
     "env": "development",
     "port": 8080,
     "dependencies": {
         "array-sugar": "latest",
         "express": "~4.0",
+        "bower": "latest",
         "sitemap": "~0.7",
         "async": "latest",
         "prerender-node": "latest",
@@ -33,7 +33,6 @@
         "static-favicon": "1.0.2",
         "forever": "latest",
         "grunt-ng-annotate": "latest",
-        "grunt-bower-task": "~0.3",
         "grunt-contrib-uglify": "latest",
         "grunt-contrib-concat": "latest",
         "grunt-contrib-watch": "latest",

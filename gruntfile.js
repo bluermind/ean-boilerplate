@@ -19,9 +19,6 @@ module.exports = function(grunt) {
 
     var gCfg = {
         pkg: pkgJSON,
-        bower: {
-            install:{}
-        },
         watch: {
             options: {
                 port: 35729,
@@ -174,7 +171,6 @@ module.exports = function(grunt) {
     } else {
         grunt.registerTask('default', ['compile', 'watch']);
     }
-    grunt.registerTask('deploy', ['bower:install', 'default']);
 
     grunt.initConfig(gCfg);
 

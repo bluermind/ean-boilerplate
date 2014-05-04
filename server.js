@@ -26,7 +26,7 @@ if (env === 'production') {
 app.use(require('static-favicon')());
 app.set('showStackError', true);
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('./public/'));
 app.use(require('morgan')('dev'));
 
 app.use(require('body-parser')()); 						// pull information from html in POST
