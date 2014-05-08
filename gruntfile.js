@@ -61,9 +61,16 @@ module.exports = function(grunt) {
             }
         },
         karma: {
+            options: {
+                configFile: 'karma.conf.js'
+            },
             unit: {
-                configFile: 'karma.conf.js',
+                autoWatch: false,
                 singleRun: true
+            },
+            tdd: {
+                autoWatch: true,
+                singleRun: false
             }
         },
         concat: {
@@ -158,6 +165,11 @@ module.exports = function(grunt) {
 	grunt.registerTask('test', [
 		'ngtemplates',
 		'karma:unit'
+	]);
+
+    grunt.registerTask('tdd', [
+		'ngtemplates',
+		'karma:tdd'
 	]);
     //Making grunt default to force in order not to break the project.
 //    grunt.option('force', true);

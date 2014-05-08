@@ -1,53 +1,53 @@
 {
-    "name": "ean-boilerplate",
-    "description": "EAN - A Modern Stack: ExpressJS, AngularJS, NodeJS.",
-    "version": "0.0.1",
-    "private": false,
-    "author": "Jiri Spac",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/capaj/ean-boilerplate.git"
-    },
-    "engines": {
-        "node": "0.10.x",
-        "npm": "1.2.x"
-    },
-    "scripts": {
-        "start": "node node_modules/grunt-cli/bin/grunt",
-        "test": "node node_modules/grunt-cli/bin/grunt test"
-    },
-    "env": "development",
-    "port": 8080,
-    "dependencies": {
-        "array-sugar": "latest",
-        "express": "~4.0",
-        "bower": "latest",
-        "sitemap": "~0.7",
-        "async": "latest",
-        "prerender-node": "latest",
-        "winston": "latest",
-        "method-override": "1.0.0",
-        "body-parser": "1.0.2",
-        "morgan": "1.0.0",
-        "compression": "1.0.1",
-        "static-favicon": "1.0.2",
-        "forever": "latest",
-        "grunt-ng-annotate": "latest",
-        "grunt-contrib-uglify": "latest",
-        "grunt-contrib-concat": "latest",
-        "grunt-contrib-watch": "latest",
-        "grunt-contrib-less": "latest",
-        "grunt-smg": "latest",
-        "grunt-concurrent": "latest",
-        "grunt-contrib-copy": "latest",
-        "grunt-text-replace": "latest",
-        "grunt": "latest",
-		"grunt-angular-templates": "latest",
-		"load-grunt-tasks": "latest",
-        "lodash": "latest"
-    },
-    "devDependencies": {
-        "grunt-karma": "latest",
-        "grunt-bump": "latest"
-    }
+  "name": "ean-boilerplate",
+  "description": "EAN - A Modern Stack: ExpressJS, AngularJS, NodeJS.",
+  "version": "0.0.1",
+  "private": false,
+  "author": "Jiri Spac",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/capaj/ean-boilerplate.git"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "scripts": {
+    "start": "node node_modules/grunt-cli/bin/grunt",
+    "test": "node node_modules/grunt-cli/bin/grunt test"
+  },
+  "env": "development",
+  "port": 8080,
+  "dependencies": {
+    "array-sugar": "latest",
+    "express": "~4.1",
+    "bower": "latest",
+    "sitemap": "~0.7",
+    "prerender-node": "latest",
+    "winston": "~0.7",
+    "method-override": "~1.0",
+    "body-parser": "~1.0",
+    "morgan": "~1.0",
+    "compression": "~1.0",
+    "static-favicon": "~1.0",
+    "forever": "latest",
+    "grunt-ng-annotate": "latest",
+    "grunt-contrib-uglify": "latest",
+    "grunt-contrib-concat": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-contrib-less": "latest",
+    "grunt-smg": "latest",
+    "grunt-concurrent": "latest",
+    "grunt-contrib-copy": "latest",
+    "grunt-text-replace": "latest",
+    "grunt": "latest",
+    "grunt-angular-templates": "latest",
+    "load-grunt-tasks": "latest",
+    "lodash": "latest"
+  },
+  "devDependencies": {
+    "grunt-bump": "latest",
+    "grunt-karma": "~0.8",
+    "karma-jasmine": "^0.1.5",
+    "karma-phantomjs-launcher": "^0.1.4"
+  }
 }
