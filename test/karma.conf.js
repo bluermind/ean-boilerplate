@@ -1,7 +1,7 @@
 // Karma configuration
 // http://karma-runner.github.io/0.10/config/configuration-file.html
 require('array-sugar');
-var sManifest = require('./public/script-manifest.js').dev;
+var sManifest = require('../public/script-manifest.js').development;
 var testFiles = [];
 for(var i in sManifest){
 	testFiles.insert(testFiles.length-1, sManifest[i]);
@@ -15,7 +15,7 @@ console.dir(testFiles);	//shows loaded files, good for checking whether your blo
 module.exports = function(config) {
 	config.set({
 		// base path, that will be used to resolve files and exclude
-		basePath: '',
+		basePath: '../',
 
 		// testing framework to use (jasmine/mocha/qunit/...)
 		frameworks: ['jasmine'],
@@ -33,9 +33,6 @@ module.exports = function(config) {
 		// possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
 		logLevel: config.LOG_INFO,
 
-		// enable / disable watching file and executing tests whenever any file changes
-		autoWatch: false,
-
 		// Start these browsers, currently available:
 		// - Chrome
 		// - ChromeCanary
@@ -44,11 +41,8 @@ module.exports = function(config) {
 		// - Safari (only Mac)
 		// - PhantomJS
 		// - IE (only Windows)
-		browsers: ['PhantomJS'],
-//    browsers: ['Chrome','Safari','Firefox','Opera','ChromeCanary'],
+		browsers: ['PhantomJS']
+        //    browsers: ['Chrome','Safari','Firefox','Opera','ChromeCanary'],
 
-		// Continuous Integration mode
-		// if true, it capture browsers, run tests and exit
-		singleRun: true
 	});
 };
