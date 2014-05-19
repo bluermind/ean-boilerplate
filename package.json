@@ -30,6 +30,7 @@
     "compression": "~1.0",
     "static-favicon": "~1.0",
     "forever": "latest",
+    "bitbucket-githook": "latest",
     "grunt-ng-annotate": "latest",
     "grunt-contrib-uglify": "latest",
     "grunt-contrib-concat": "latest",
