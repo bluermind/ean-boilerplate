@@ -1,16 +1,18 @@
 // Karma configuration
 // http://karma-runner.github.io/0.10/config/configuration-file.html
-require('array-sugar');
+
 var sManifest = require('../public/script-manifest.js').development;
 var testFiles = [];
+
 for(var i in sManifest){
-	testFiles.insert(testFiles.length-1, sManifest[i]);
+	testFiles = testFiles.concat(sManifest[i]);
 }
 testFiles = testFiles.concat([
 	'public/built/ng-templates.js',
 	'public/lib/angular-mocks/angular-mocks.js',
 	'test/unit/**/*.js'
 ]);
+
 console.dir(testFiles);	//shows loaded files, good for checking whether your blob expressions are proper
 module.exports = function(config) {
 	config.set({
