@@ -31,7 +31,7 @@ if (module.exports) {
                 bc + '**/moment.js',
                 bc + '**/jquery.min.js'
             ],
-            2: [bc + '**/angular.js'],
+            2: [bc + '**/angular.js', 'public/js/bootstrap/*.js'],
             3: [
                 bc + '**/ng-tools.js',
                 bc + '**/angular-touch.js',
@@ -49,7 +49,7 @@ if (module.exports) {
                 bc + 'array-sugar/array-sugar.js',
                 bc + '**/moment.min.js', bc + '**/jquery.min.js'
             ],
-            2: [bc + '**/angular.min.js'],
+            2: [bc + '**/angular.min.js', 'public/js/bootstrap/*.js'],
             3: [
                 bc + '**/ng-tools.min.js',
                 bc + '**/angular-touch.min.js',
