@@ -21,8 +21,7 @@ module.exports = function(grunt) {
         pkg: pkgJSON,
         watch: {
             options: {
-                port: 35729,
-                livereload: true
+                livereload: 35729
             },
             files: ['public/**/*.html', '!public/index.html', '!public/index_build_template.html'],
             JSSources: {
