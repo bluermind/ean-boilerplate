@@ -11,7 +11,7 @@ window.app = angular.module('app',
     function($locationProvider, $routeProvider) {
         $locationProvider.html5Mode(true);  //Setting HTML5 Location Mode
 
-        routesModule.routes.forEach(function(routeDef){
+        require('../routes').forEach(function(routeDef){
             $routeProvider.when(routeDef.route, routeDef.resolve);
         });
         $routeProvider.otherwise({redirectTo:'/404'});

@@ -8,16 +8,15 @@ module.exports = function(grunt) {
 
     var env = grunt.option('env') || pkgJSON.env;
 
-    var SM = require('./public/script-manifest.js');
     var mainFileName = 'main-' + env + '-<%= pkg.version %>.js';
-    var appScripts = 'public/js/**/*.js';
+    var appScripts = 'public/**/*.js';
 
     var gCfg = {
         pkg: pkgJSON,
 		browserify: {
 			development: {
 				// A single entry point for our app
-				src: 'public/js/main.js',
+				src: 'public/main.js',
 				// Compile to a single file to add a script tag for in your HTML
 				dest: 'public/built/<%= pkg.name %>.js',
 
@@ -35,7 +34,7 @@ module.exports = function(grunt) {
             },
             files: ['public/**/*.html', '!public/index.html', '!public/index_build_template.html'],
 			JSSources: {
-                files: [appScripts, '!public/lib'],
+                files: [appScripts, '!public/built'],
                 tasks: ['browserify']
             },
             less: {
@@ -54,7 +53,7 @@ module.exports = function(grunt) {
         },
         smg:{   //generates main.js
             mainInit: {
-                steps: SM[env],
+                steps: env,
                 relativeTo: 'public',  // this path will be omitted from all url paths,
                 dest: 'public/built/' + mainFileName
             }
@@ -70,12 +69,6 @@ module.exports = function(grunt) {
             tdd: {
                 autoWatch: true,
                 singleRun: false
-            }
-        },
-        concat: {
-            app: {
-                src: SM.concat,
-                dest: concatJSFile
             }
         },
         ngAnnotate: {
@@ -98,7 +91,7 @@ module.exports = function(grunt) {
                 replacements: [
                     {
                         from: '<--built css-->',
-                        to: '<%= pkg.name %>-<%= pkg.version %>.min.css'
+                        to: '/built/<%= pkg.name %>-<%= pkg.version %>.min.css'
                     },
                     {
                         from: '<script src="http://localhost:35729/livereload.js"></script>',
@@ -112,15 +105,20 @@ module.exports = function(grunt) {
                 replacements: [
                     {
                         from: '<--built css-->',
-                        to: '<%= pkg.name %>-<%= pkg.version %>.css'
+                        to: '<%= pkg.name %>.css'
                     }
                 ]
             }
         },
         less: {
             development: {
+                options: {
+                    sourceMap: true,
+                    sourceMapBasepath: 'public', // Sets sourcemap base path, defaults to current working directory.
+                    sourceMapRootpath: '/' // adds this path onto the sourcemap filename and less file paths
+                },
                 src:  './public/less/bootstrap.less',
-                dest: './public/built/<%= pkg.name %>-<%= pkg.version %>.css'
+                dest: './public/<%= pkg.name %>.css'
             },
             production: {
                 options: {

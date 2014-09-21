@@ -30,7 +30,6 @@
     "grunt-angular-templates": "latest",
     "grunt-browserify": "latest",
     "grunt-concurrent": "latest",
-    "grunt-contrib-concat": "latest",
     "grunt-contrib-copy": "latest",
     "grunt-contrib-less": "latest",
     "grunt-contrib-uglify": "latest",

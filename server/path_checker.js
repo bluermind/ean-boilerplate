@@ -3,10 +3,10 @@ String.prototype.startsWith = function (str){
 };
 
 
-var routesModule = require('../public/js/routes.js');
+var routes = require('../public/routes.js');
 var appRoutes = [];
 
-routesModule.routes.forEach(function(routeDefinition){
+routes.forEach(function(routeDefinition){
     if (routeDefinition.route === '/') {
         return;
     }

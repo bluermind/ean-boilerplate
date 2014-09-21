@@ -7,8 +7,9 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <base href="http://localhost:8050/">
     <title></title>
-    <link rel="stylesheet" href="/built/<--built css-->" type='text/css'>
+    <link rel="stylesheet" href="/<--built css-->" type='text/css'>
     <!--[if lte IE 9]>
     <link rel="shortcut icon" href="/img/icons/favicon.ico">
     <![endif]-->
@@ -48,15 +49,6 @@
         </div>
     </div>
 
-	<div class="container">
-		<h1>Bootstrap starter template</h1>
-		<p class="lead">Use this document as a way to quickly start any new project.<br>
-			This is the only precreated controller, creation of others awaits for you.
-		</p>
-		<h3>You can test if angular bootstrapped all right down here in the bound input:</h3>
-		<input type="text" ng-model="bindingTest">
-		<span ng-bind="bindingTest"></span>
-	</div>
     <ng-view>
     </ng-view><!-- /.container -->
 
