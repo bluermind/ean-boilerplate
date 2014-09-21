@@ -12,21 +12,31 @@ module.exports = function(grunt) {
     var mainFileName = 'main-' + env + '-<%= pkg.version %>.js';
     var appScripts = 'public/js/**/*.js';
 
-    var mainReplacement = [{
-        from: '<--built script manifest-->',
-        to: '/built/' + mainFileName
-    }];
-
     var gCfg = {
         pkg: pkgJSON,
+		browserify: {
+			development: {
+				// A single entry point for our app
+				src: 'public/js/main.js',
+				// Compile to a single file to add a script tag for in your HTML
+				dest: 'public/built/<%= pkg.name %>.js',
+
+				options: {
+					browserifyOptions: {
+						debug: true
+					},
+					transform: ['require-globify']
+				}
+			}
+		},
         watch: {
             options: {
                 livereload: 35729
             },
             files: ['public/**/*.html', '!public/index.html', '!public/index_build_template.html'],
-            JSSources: {
+			JSSources: {
                 files: [appScripts, '!public/lib'],
-                tasks: []
+                tasks: ['browserify']
             },
             less: {
                 files: 'public/less/**/*.less',
@@ -36,17 +46,7 @@ module.exports = function(grunt) {
                 files: 'public/index_build_template.html',
                 tasks: ['replace:' + env]
             },
-            manifest: {
-                files: 'public/script-manifest.js',
-                tasks: ['smg']
-            },
-            JSfileAddedDeleted: {
-                files: appScripts,
-                tasks: ['smg'],
-                options: {
-                    event: ['added', 'deleted']
-                }
-            },
+
             bower: {
                 files: 'bower.json',
                 tasks: []
@@ -95,7 +95,7 @@ module.exports = function(grunt) {
             production: {
                 src: 'public/index_build_template.html',
                 dest: 'public/index.html',
-                replacements: mainReplacement.concat([
+                replacements: [
                     {
                         from: '<--built css-->',
                         to: '<%= pkg.name %>-<%= pkg.version %>.min.css'
@@ -104,21 +104,17 @@ module.exports = function(grunt) {
                         from: '<script src="http://localhost:35729/livereload.js"></script>',
                         to: ''
                     }
-                ])
+                ]
             },
             development: {
                 src: 'public/index_build_template.html',
                 dest: 'public/index.html',
-                replacements: mainReplacement.concat([
+                replacements: [
                     {
                         from: '<--built css-->',
                         to: '<%= pkg.name %>-<%= pkg.version %>.css'
-                    },
-                    {
-                        from: '<--built script manifest-->',
-                        to: mainFileName
                     }
-                ])
+                ]
             }
         },
         less: {
@@ -150,7 +146,7 @@ module.exports = function(grunt) {
 		}
     };
     //compile task customization
-    var compile = ['less', 'replace'];
+    var compile = ['less', 'replace', 'browserify'];
 
     compile = compile.map(function (step) {
         return step + ':' + env;
@@ -158,7 +154,7 @@ module.exports = function(grunt) {
     if (env == 'production') {
         compile = compile.concat(['concat', 'ngAnnotate', 'uglify'])
     }
-    compile.push('smg');
+
     // compile task end
 
 	grunt.registerTask('test', [

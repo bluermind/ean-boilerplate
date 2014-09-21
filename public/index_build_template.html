@@ -47,17 +47,24 @@
             </div><!--/.nav-collapse -->
         </div>
     </div>
+
+	<div class="container">
+		<h1>Bootstrap starter template</h1>
+		<p class="lead">Use this document as a way to quickly start any new project.<br>
+			This is the only precreated controller, creation of others awaits for you.
+		</p>
+		<h3>You can test if angular bootstrapped all right down here in the bound input:</h3>
+		<input type="text" ng-model="bindingTest">
+		<span ng-bind="bindingTest"></span>
+	</div>
     <ng-view>
     </ng-view><!-- /.container -->
 
-    <script src="/lib/script.js/dist/script.min.js"></script>
-    <script src="<--built script manifest-->"></script>
-    <script>
-        navigator.standalone = navigator.standalone || (screen.height-document.documentElement.clientHeight<40);
-        $script.ready('scriptManifestReady', function(){
-            angular.bootstrap(document, ['app']);
-        });
-    </script>
-    <script src="http://localhost:35729/livereload.js"></script>
+	<script src="/built/ean-boilerplate.js"></script>
+	<script>
+		navigator.standalone = navigator.standalone || (screen.height-document.documentElement.clientHeight<40);
+		angular.bootstrap(document, ['app']);
+	</script>
+	<script src="http://localhost:35729/livereload.js"></script>
 </body>
 </html>
