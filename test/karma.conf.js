@@ -1,19 +1,8 @@
 // Karma configuration
 // http://karma-runner.github.io/0.10/config/configuration-file.html
 
-var sManifest = require('../public/script-manifest.js').development;
-var testFiles = [];
+var pjson = require('../package.json');
 
-for(var i in sManifest){
-	testFiles = testFiles.concat(sManifest[i]);
-}
-testFiles = testFiles.concat([
-	'public/built/ng-templates.js',
-	'public/lib/angular-mocks/angular-mocks.js',
-	'test/unit/**/*.js'
-]);
-
-console.dir(testFiles);	//shows loaded files, good for checking whether your blob expressions are proper
 module.exports = function(config) {
 	config.set({
 		// base path, that will be used to resolve files and exclude
@@ -23,10 +12,14 @@ module.exports = function(config) {
 		frameworks: ['jasmine'],
 
 		// list of files / patterns to load in the browser
-		files: testFiles,
+		files: [
+			'public/built/*.js',
+			'public/lib/angular-mocks/angular-mocks.js',
+			'test/unit/**/*.js'
+		],
 
 		// list of files / patterns to exclude
-		exclude: [],
+		exclude: ['public/built/*.min.js'],
 
 		// web server port
 		port: 8066,

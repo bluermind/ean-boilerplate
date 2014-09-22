@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
     // Project Configuration
-    var concatJSFile = 'public/built/<%= pkg.name %>-<%= pkg.version %>.js';
+    var minifiedJSFile = '/built/<%= pkg.name %>-<%= pkg.version %>.min.js';
     var annJSFile = 'public/built/<%= pkg.name %>-<%= pkg.version %>.annotated.js';
     var pkgJSON = grunt.file.readJSON('package.json');
 	//Load all NPM tasks
@@ -8,17 +8,19 @@ module.exports = function(grunt) {
 
     var env = grunt.option('env') || pkgJSON.env;
 
-    var mainFileName = 'main-' + env + '-<%= pkg.version %>.js';
-    var appScripts = 'public/**/*.js';
+    var mainFile = 'public/main.js';
 
-    var gCfg = {
-        pkg: pkgJSON,
+	var pathToCss = 'built/<%= pkg.name %>-<%= pkg.version %>.min.css';
+	var debugBundlePath = '/built/<%= pkg.name %>.js';
+
+	var gCfg = {
+		pkg: pkgJSON,
 		browserify: {
 			development: {
 				// A single entry point for our app
-				src: 'public/main.js',
+				src: mainFile,
 				// Compile to a single file to add a script tag for in your HTML
-				dest: 'public/built/<%= pkg.name %>.js',
+				dest: 'public' + debugBundlePath,
 
 				options: {
 					browserifyOptions: {
@@ -26,36 +28,39 @@ module.exports = function(grunt) {
 					},
 					transform: ['require-globify']
 				}
+			},
+			production: {
+
+				src: annJSFile,
+				// Compile to a single file to add a script tag for in your HTML
+				dest: 'public' + minifiedJSFile,
+
+				options: {
+					transform: ['uglifyify']
+				}
 			}
 		},
-        watch: {
-            options: {
-                livereload: 35729
-            },
-            files: ['public/**/*.html', '!public/index.html', '!public/index_build_template.html'],
+		watch: {
+			options: {
+				livereload: 35729
+			},
+			files: ['public/**/*.html', '!public/index.html', '!public/index_build_template.html'],
 			JSSources: {
-                files: [appScripts, '!public/built'],
-                tasks: ['browserify']
-            },
-            less: {
-                files: 'public/less/**/*.less',
-                tasks: ['less:' + env]
-            },
-            replace: {
-                files: 'public/index_build_template.html',
+				files: ['public/**/*.js', '!public/built'],
+				tasks: ['browserify']
+			},
+			less: {
+				files: 'public/less/**/*.less',
+				tasks: ['less:' + env]
+			},
+			replace: {
+				files: 'public/index_build_template.html',
                 tasks: ['replace:' + env]
             },
 
             bower: {
                 files: 'bower.json',
                 tasks: []
-            }
-        },
-        smg:{   //generates main.js
-            mainInit: {
-                steps: env,
-                relativeTo: 'public',  // this path will be omitted from all url paths,
-                dest: 'public/built/' + mainFileName
             }
         },
         karma: {
@@ -73,15 +78,8 @@ module.exports = function(grunt) {
         },
         ngAnnotate: {
             app: {
-                src: concatJSFile,
+                src: 'public' + debugBundlePath,
                 dest: annJSFile
-            }
-        },
-        uglify: {
-            dist: {
-                files: {
-                    'public/built/<%= pkg.name %>-<%= pkg.version %>.min.js': annJSFile
-                }
             }
         },
         replace: {
@@ -91,12 +89,16 @@ module.exports = function(grunt) {
                 replacements: [
                     {
                         from: '<--built css-->',
-                        to: '/built/<%= pkg.name %>-<%= pkg.version %>.min.css'
+                        to: pathToCss
                     },
                     {
                         from: '<script src="http://localhost:35729/livereload.js"></script>',
                         to: ''
-                    }
+                    },
+					{
+						from: '<-- bundlePath -->',
+						to: minifiedJSFile
+					}
                 ]
             },
             development: {
@@ -106,7 +108,11 @@ module.exports = function(grunt) {
                     {
                         from: '<--built css-->',
                         to: '<%= pkg.name %>.css'
-                    }
+                    },
+					{
+						from: '<-- bundlePath -->',
+						to: debugBundlePath
+					}
                 ]
             }
         },
@@ -127,7 +133,7 @@ module.exports = function(grunt) {
                     report: 'min'
                 },
                 src:  './public/less/bootstrap.less',
-                dest: './public/built/<%= pkg.name %>-<%= pkg.version %>.min.css'
+                dest: './public/' + pathToCss
             }
         },
 		ngtemplates:  {
@@ -144,15 +150,15 @@ module.exports = function(grunt) {
 		}
     };
     //compile task customization
-    var compile = ['less', 'replace', 'browserify'];
+    var steps = ['less', 'replace'];
 
-    compile = compile.map(function (step) {
+    steps = steps.map(function (step) {
         return step + ':' + env;
     });
     if (env == 'production') {
-        compile = compile.concat(['concat', 'ngAnnotate', 'uglify'])
+        steps.push('ngAnnotate');
     }
-
+	steps.push('browserify:' + env);
     // compile task end
 
 	grunt.registerTask('test', [
@@ -168,7 +174,7 @@ module.exports = function(grunt) {
 //    grunt.option('force', true);
 
     //Default task(s).
-    grunt.registerTask('compile', compile);
+    grunt.registerTask('compile', steps);
 
     if (env == 'production') {
         grunt.registerTask('default', ['compile']);

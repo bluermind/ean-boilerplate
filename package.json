@@ -44,6 +44,7 @@
     "require-globify": "^0.1.0",
     "sitemap": "~0.7",
     "static-favicon": "~1.0",
+    "uglifyify": "^2.5.0",
     "winston": "~0.7"
   },
   "devDependencies": {
