@@ -1,3 +1,5 @@
+require('./less/bootstrap.less');
+
 window.jQuery = window.$ = require('./lib/jquery/dist/jquery.min');
 
 require('./lib/angular/angular');

@@ -26,7 +26,7 @@ module.exports = function(grunt) {
 					browserifyOptions: {
 						debug: true
 					},
-					transform: ['require-globify']
+					transform: ['require-globify', 'require-stylify']
 				}
 			},
 			production: {
@@ -88,10 +88,6 @@ module.exports = function(grunt) {
                 dest: 'public/index.html',
                 replacements: [
                     {
-                        from: '<--built css-->',
-                        to: pathToCss
-                    },
-                    {
                         from: '<script src="http://localhost:35729/livereload.js"></script>',
                         to: ''
                     },
@@ -105,10 +101,6 @@ module.exports = function(grunt) {
                 src: 'public/index_build_template.html',
                 dest: 'public/index.html',
                 replacements: [
-                    {
-                        from: '<--built css-->',
-                        to: '<%= pkg.name %>.css'
-                    },
 					{
 						from: '<-- bundlePath -->',
 						to: debugBundlePath
@@ -150,7 +142,7 @@ module.exports = function(grunt) {
 		}
     };
     //compile task customization
-    var steps = ['less', 'replace'];
+    var steps = ['replace'];
 
     steps = steps.map(function (step) {
         return step + ':' + env;
