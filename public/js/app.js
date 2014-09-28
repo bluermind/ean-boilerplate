@@ -1,4 +1,4 @@
-window.app = angular.module('app',
+module.exports = angular.module('app',
     [
         'ngRoute',
         'ngTouch',
@@ -14,6 +14,7 @@ window.app = angular.module('app',
         require('../routes').forEach(function(routeDef){
             $routeProvider.when(routeDef.route, routeDef.resolve);
         });
+
         $routeProvider.otherwise({redirectTo:'/404'});
     }
 );

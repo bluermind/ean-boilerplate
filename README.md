@@ -95,12 +95,8 @@ Bower Clean Cache:
 $ bower cache clean
 ```
 
-
-## Configuration
-All configuration is specified in the [config](config/) folder, particularly the [config.js](config/config.js) file and the [env](config/env/) files. Here you will need to specify your application name, database name, as well as hook up any social app keys if you want integration with Twitter, Facebook, GitHub or Google.
-
 ### Environmental Settings
-TODO write up on settings
+There are two predefined environment- development and production. With second, scripts and styles get minimized in the build process.
 
 To run with a different environment, just rewrite "env" in package.json to the enviroment you want.
 

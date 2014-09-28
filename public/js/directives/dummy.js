@@ -1,4 +1,4 @@
-app.directive('dummy', function () {
+require('../app').directive('dummy', function () {
 	return {
 		restrict: "E",
 		replace: false,

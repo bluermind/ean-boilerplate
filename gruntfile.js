@@ -31,12 +31,20 @@ module.exports = function(grunt) {
 			},
 			production: {
 
-				src: annJSFile,
+				src: mainFile,
 				// Compile to a single file to add a script tag for in your HTML
 				dest: 'public' + minifiedJSFile,
 
 				options: {
-					transform: ['uglifyify']
+                    browserifyOptions: {
+                        debug: false
+                    },
+                    transform: [
+                        'require-globify',
+                        [{compress: true},'require-stylify'],
+                        [{ add: true, regexp: /^require(.*)$/ }, 'browserify-ngannotate'],   // thx to https://github.com/olov/ng-annotate/issues/85
+                        'uglifyify'
+                    ]
 				}
 			}
 		},
@@ -46,12 +54,12 @@ module.exports = function(grunt) {
 			},
 			files: ['public/**/*.html', '!public/index.html', '!public/index_build_template.html'],
 			JSSources: {
-				files: ['public/**/*.js', '!public/built'],
-				tasks: ['browserify']
+				files: ['public/**/*.js', '!public/built/**.*'],
+				tasks: ['browserify:development']
 			},
 			less: {
 				files: 'public/less/**/*.less',
-				tasks: ['less:' + env]
+				tasks: ['browserify:development']
 			},
 			replace: {
 				files: 'public/index_build_template.html',
@@ -74,12 +82,6 @@ module.exports = function(grunt) {
             tdd: {
                 autoWatch: true,
                 singleRun: false
-            }
-        },
-        ngAnnotate: {
-            app: {
-                src: 'public' + debugBundlePath,
-                dest: annJSFile
             }
         },
         replace: {
@@ -108,26 +110,6 @@ module.exports = function(grunt) {
                 ]
             }
         },
-        less: {
-            development: {
-                options: {
-                    sourceMap: true,
-                    sourceMapBasepath: 'public', // Sets sourcemap base path, defaults to current working directory.
-                    sourceMapRootpath: '/' // adds this path onto the sourcemap filename and less file paths
-                },
-                src:  './public/less/bootstrap.less',
-                dest: './public/<%= pkg.name %>.css'
-            },
-            production: {
-                options: {
-                    compress: true,
-                    yuicompress: true,
-                    report: 'min'
-                },
-                src:  './public/less/bootstrap.less',
-                dest: './public/' + pathToCss
-            }
-        },
 		ngtemplates:  {
 			app:        {
 				options:{
@@ -148,7 +130,7 @@ module.exports = function(grunt) {
         return step + ':' + env;
     });
     if (env == 'production') {
-        steps.push('ngAnnotate');
+        //steps.push('ngtemplates');
     }
 	steps.push('browserify:' + env);
     // compile task end
