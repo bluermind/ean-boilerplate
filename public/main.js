@@ -11,3 +11,5 @@ require('./lib/es6-shim/es6-shim');
 
 requireGlob('./js/**/*.js');
 
+
+angular.bootstrap(document, ['app']);
