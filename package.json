@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "grunt-bump": "latest",
+    "karma-bro": "^0.8.0",
     "grunt-karma": "~0.9",
     "karma-jasmine": "^0.1.5",
     "karma-phantomjs-launcher": "^0.1.4"
