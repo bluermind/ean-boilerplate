@@ -1,10 +1,10 @@
 // Very basic unit test for a directive with template
 describe('Directive: dummy', function() {
-	beforeEach(module('app'));
+	beforeEach(angular.mock.module('app'));
 
 	var element, scope;
 
-	beforeEach(module('ngTemplates'));
+	beforeEach(angular.mock.module('ngTemplates'));
 
 	beforeEach(inject(function($rootScope, $compile) {
 		element = angular.element('<dummy></dummy>');

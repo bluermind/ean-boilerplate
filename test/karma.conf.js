@@ -9,11 +9,12 @@ module.exports = function(config) {
 		basePath: '../',
 
 		// testing framework to use (jasmine/mocha/qunit/...)
-		frameworks: ['jasmine'],
+		frameworks: ['jasmine', 'browserify'],
 
 		// list of files / patterns to load in the browser
 		files: [
-			'public/built/*.js',
+			'public/lib/jquery/dist/jquery.js',
+			'public/lib/angular/angular.js',
 			'public/lib/angular-mocks/angular-mocks.js',
 			'test/unit/**/*.js'
 		],
@@ -28,6 +29,22 @@ module.exports = function(config) {
 		// possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
 		logLevel: config.LOG_INFO,
 
+		browserify: {
+			// extensions: ['.coffee'],
+			// ignore: [],
+			transform: [
+				'require-globify',
+				'html2js-browserify',
+				['require-stylify', {compress: false, sourceMap: true, rootDir: './public'}]
+			],
+			debug: true,
+			// noParse: ['jquery'],
+			watch: true
+		},
+
+		preprocessors: {
+			'test/unit/**/*.js': ['browserify']
+		},
 		// Start these browsers, currently available:
 		// - Chrome
 		// - ChromeCanary

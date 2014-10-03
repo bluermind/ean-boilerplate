@@ -1,11 +1,10 @@
-'use strict';
 describe('rootCtrl', function() {
 	var scope;
 	var ctrl;
 
 	// You need to load modules that you want to test,
 	// it loads only the "ng" module by default.
-	beforeEach(module('app'));
+	beforeEach(angular.mock.module('app'));
 	beforeEach(inject(function ($rootScope, $controller) {
 		scope = $rootScope.$new();
 		ctrl = $controller('rootCtrl', {$scope: scope});

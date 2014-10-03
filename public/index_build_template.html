@@ -50,10 +50,12 @@
 
     <ng-view>
     </ng-view><!-- /.container -->
-
+	<script type="text/javascript" src="lib/angular/angular.js"></script>
+	<script type="text/javascript" src="lib/jquery/dist/jquery.js"></script>
 	<script src="<-- bundlePath -->"></script>
 	<script>
 		navigator.standalone = navigator.standalone || (screen.height-document.documentElement.clientHeight<40);
+		angular.bootstrap(document, ['app']);
 	</script>
 	<script src="http://localhost:35729/livereload.js"></script>
 </body>
