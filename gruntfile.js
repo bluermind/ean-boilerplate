@@ -26,7 +26,7 @@ module.exports = function(grunt) {
 					browserifyOptions: {
 						debug: true
 					},
-					transform: ['require-globify', 'require-stylify']
+					transform: ['require-globify', 'html2js-browserify', 'require-stylify']
 				}
 			},
 			production: {
@@ -41,6 +41,7 @@ module.exports = function(grunt) {
                     },
                     transform: [
                         'require-globify',
+						'html2js-browserify',
                         [{compress: true},'require-stylify'],
                         [{ add: true, regexp: /^require(.*)$/ }, 'browserify-ngannotate'],   // thx to https://github.com/olov/ng-annotate/issues/85
                         'uglifyify'
