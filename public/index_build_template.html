@@ -9,6 +9,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <base href="http://localhost:8050/">
     <title></title>
+    <link rel="stylesheet" href="/less/bootstrap.css">
     <!--[if lte IE 9]>
     <link rel="shortcut icon" href="/img/icons/favicon.ico">
     <![endif]-->
@@ -52,11 +53,19 @@
     </ng-view><!-- /.container -->
 	<script type="text/javascript" src="lib/angular/angular.js"></script>
 	<script type="text/javascript" src="lib/jquery/dist/jquery.js"></script>
-	<script src="<-- bundlePath -->"></script>
+    <script src="jspm_packages/system.js"></script>
+    <script src="config.js"></script>
+
 	<script>
 		navigator.standalone = navigator.standalone || (screen.height-document.documentElement.clientHeight<40);
-		angular.bootstrap(document, ['app']);
 	</script>
+    <script>
+        System.import('main').then(function() {
+            angular.bootstrap(document, ['app']);
+        }, function(e) {
+            console.error(e);
+        });
+    </script>
 	<script src="http://localhost:35729/livereload.js"></script>
 </body>
 </html>

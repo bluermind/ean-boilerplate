@@ -1,12 +1,20 @@
-require('./less/bootstrap.less');
-
+require('angular');
 require('./lib/angular-route/angular-route');
 require('./lib/angular-touch/angular-touch');
 require('./lib/angular-moment/angular-moment');
 require('./lib/angularLocalStorage-nc/dist/angularLocalStorage.min');
-require('./lib/es6-shim/es6-shim');
 
-requireGlob('./js/**/*.js');
-
-
-
+require('./js/bootstrap/affix');
+require('./js/bootstrap/alert');
+require('./js/bootstrap/button');
+require('./js/bootstrap/carousel');
+require('./js/bootstrap/collapse');
+require('./js/bootstrap/dropdown');
+require('./js/bootstrap/modal');
+require('./js/bootstrap/scrollspy');
+require('./js/bootstrap/tab');
+require('./js/bootstrap/tooltip');
+require('./js/bootstrap/transition');
+require('./js/controllers/root-ctrl');
+require('./js/directives/dummy');
+require('./js/app');

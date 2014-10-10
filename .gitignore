@@ -3,6 +3,7 @@
 .sass-cache/
 node_modules/
 public/lib
+public/jspm_packages
 config/secrets
 
 .idea/workspace.xml

@@ -15,40 +15,6 @@ module.exports = function(grunt) {
 
 	var gCfg = {
 		pkg: pkgJSON,
-		browserify: {
-			development: {
-				// A single entry point for our app
-				src: mainFile,
-				// Compile to a single file to add a script tag for in your HTML
-				dest: 'public' + debugBundlePath,
-
-				options: {
-					browserifyOptions: {
-						debug: true
-					},
-					transform: ['require-globify', 'html2js-browserify', 'require-stylify']
-				}
-			},
-			production: {
-
-				src: mainFile,
-				// Compile to a single file to add a script tag for in your HTML
-				dest: 'public' + minifiedJSFile,
-
-				options: {
-                    browserifyOptions: {
-                        debug: false
-                    },
-                    transform: [
-                        'require-globify',
-						'html2js-browserify',
-                        [{compress: true},'require-stylify'],
-                        [{ add: true, regexp: /^require(.*)$/ }, 'browserify-ngannotate'],   // thx to https://github.com/olov/ng-annotate/issues/85
-                        'uglifyify'
-                    ]
-				}
-			}
-		},
 		watch: {
 			options: {
 				livereload: 35729
@@ -56,11 +22,11 @@ module.exports = function(grunt) {
 			files: ['public/**/*.html', '!public/index.html', '!public/index_build_template.html'],
 			JSSources: {
 				files: ['public/**/*.js', '!public/built/**.*'],
-				tasks: ['browserify:development']
+				tasks: []
 			},
 			less: {
 				files: 'public/less/**/*.less',
-				tasks: ['browserify:development']
+				tasks: ['less']
 			},
 			replace: {
 				files: 'public/index_build_template.html',
@@ -133,7 +99,6 @@ module.exports = function(grunt) {
     if (env == 'production') {
         //steps.push('ngtemplates');
     }
-	steps.push('browserify:' + env);
     // compile task end
 
 	grunt.registerTask('test', [
