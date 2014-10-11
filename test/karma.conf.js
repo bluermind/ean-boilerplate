@@ -12,20 +12,21 @@ module.exports = function(config) {
 		frameworks: ['jspm', 'jasmine'],
 
 		// list of files / patterns to load in the browser
-		files: [
-			'test/unit/**/*.js'
-		],
+		files: [],
 		jspm: {
 			// Edit this to your needs
-			loadFiles: ['public/main.js'],
-			serveFiles: ['public/**', 'test/**/*.js'],
+			loadFiles: [
+				'public/jspm_packages/github/angular/bower-angular-mocks@1.3.0-rc.5/angular-mocks.js',
+				'test/unit/**/*.js'
+			],
+			serveFiles: ['public/**'],
 			config: "public/config.js",
 			packages: "public/jspm_packages"
 		},
 		// list of files / patterns to exclude
-		exclude: ['public/built/*.min.js'],
+		exclude: ['public/**/build.js'],
 		proxies: {
-			'/base': 'http://localhost:8067/public'
+			'/base': 'http://localhost:8077/'
 		},
 		// web server port
 		port: 8067,

@@ -1,3 +1,6 @@
+require('../../../public/main');
+require('../../../public/built/ng-templates');
+
 // Very basic unit test for a directive with template
 describe('Directive: dummy', function() {
 	beforeEach(angular.mock.module('app'));

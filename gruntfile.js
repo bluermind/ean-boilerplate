@@ -74,7 +74,17 @@ module.exports = function(grunt) {
 				src: ['templates/directives/**.html'],
 				dest: 'public/built/ng-templates.js'
 			}
-		}
+		},
+        connect: {
+            proxyServer: {
+                options: {
+                    debug: true,
+                    port: 8077,
+                    base: 'public'
+                }
+            }
+        }
+
     };
     //compile task customization
     var steps = ['replace'];
@@ -89,11 +99,13 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('test', [
 		'ngtemplates',
+		'connect:proxyServer',
 		'karma:unit'
 	]);
 
     grunt.registerTask('tdd', [
 		'ngtemplates',
+        'connect:proxyServer',
 		'karma:tdd'
 	]);
     //Making grunt default to force in order not to break the project.

@@ -1,3 +1,5 @@
+require('../../../public/main');
+
 describe('rootCtrl', function() {
 	var scope;
 	var ctrl;
