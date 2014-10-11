@@ -1,4 +1,4 @@
-require('../../public/built/ng-templates');
-require('../../public/main');
+//require('../../public/built/ng-templates');
+//require('../../public/main');
 
 

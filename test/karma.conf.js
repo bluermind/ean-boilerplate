@@ -9,42 +9,32 @@ module.exports = function(config) {
 		basePath: '../',
 
 		// testing framework to use (jasmine/mocha/qunit/...)
-		frameworks: ['jasmine', 'browserify'],
+		frameworks: ['jspm', 'jasmine'],
 
 		// list of files / patterns to load in the browser
 		files: [
-			'public/lib/jquery/dist/jquery.js',
-			'public/lib/angular/angular.js',
-			'public/lib/angular-mocks/angular-mocks.js',
 			'test/unit/**/*.js'
 		],
-
+		jspm: {
+			// Edit this to your needs
+			loadFiles: ['public/main.js'],
+			serveFiles: ['public/**', 'test/**/*.js'],
+			config: "public/config.js",
+			packages: "public/jspm_packages"
+		},
 		// list of files / patterns to exclude
 		exclude: ['public/built/*.min.js'],
-
+		proxies: {
+			'/base': 'http://localhost:8067/public'
+		},
 		// web server port
-		port: 8066,
+		port: 8067,
 
 		// level of logging
 		// possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
 		logLevel: config.LOG_INFO,
 
-		browserify: {
-			// extensions: ['.coffee'],
-			// ignore: [],
-			transform: [
-				'require-globify',
-				'html2js-browserify',
-				['require-stylify', {compress: false, sourceMap: true, rootDir: './public'}]
-			],
-			debug: true,
-			// noParse: ['jquery'],
-			watch: true
-		},
-
-		preprocessors: {
-			'test/unit/**/*.js': ['browserify']
-		},
+		preprocessors: {},
 		// Start these browsers, currently available:
 		// - Chrome
 		// - ChromeCanary
@@ -53,7 +43,7 @@ module.exports = function(config) {
 		// - Safari (only Mac)
 		// - PhantomJS
 		// - IE (only Windows)
-		browsers: ['PhantomJS']
+		browsers: ['Chrome']
         //    browsers: ['Chrome','Safari','Firefox','Opera','ChromeCanary'],
 
 	});

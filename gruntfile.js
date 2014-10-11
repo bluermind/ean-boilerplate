@@ -59,23 +59,9 @@ module.exports = function(grunt) {
                     {
                         from: '<script src="http://localhost:35729/livereload.js"></script>',
                         to: ''
-                    },
-					{
-						from: '<-- bundlePath -->',
-						to: minifiedJSFile
-					}
+                    }
                 ]
             },
-            development: {
-                src: 'public/index_build_template.html',
-                dest: 'public/index.html',
-                replacements: [
-					{
-						from: '<-- bundlePath -->',
-						to: debugBundlePath
-					}
-                ]
-            }
         },
 		ngtemplates:  {
 			app:        {
