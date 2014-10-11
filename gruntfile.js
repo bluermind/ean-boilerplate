@@ -17,6 +17,8 @@ module.exports = function(grunt) {
 		pkg: pkgJSON,
 		watch: {
 			options: {
+                interrupt: true,
+                debounceDelay: 500,
 				livereload: 35729
 			},
 			files: ['public/**/*.html', '!public/index.html', '!public/index_build_template.html'],
@@ -25,7 +27,7 @@ module.exports = function(grunt) {
 				tasks: []
 			},
 			less: {
-				files: 'public/less/**/*.less',
+				files: 'public/**/*.less',
 				tasks: ['less']
 			},
 			replace: {
@@ -53,15 +55,15 @@ module.exports = function(grunt) {
         },
         replace: {
             production: {
-                src: 'public/index_build_template.html',
+                src: 'public/index.html',
                 dest: 'public/index.html',
                 replacements: [
                     {
                         from: '<script src="http://localhost:35729/livereload.js"></script>',
-                        to: ''
+                        to: '<script src="build.js"></script>'
                     }
                 ]
-            },
+            }
         },
 		ngtemplates:  {
 			app:        {
@@ -83,18 +85,24 @@ module.exports = function(grunt) {
                     base: 'public'
                 }
             }
+        },
+        exec:{
+            bundle:{
+                cmd: 'jspm bundle main',
+                cwd: './public'
+            }
+        },
+        concurrent: {
+            tdd: {
+                tasks: ['tdd_karma', 'watch'],
+                options: {
+                    logConcurrentOutput: true
+                }
+            }
         }
 
     };
-    //compile task customization
-    var steps = ['replace'];
 
-    steps = steps.map(function (step) {
-        return step + ':' + env;
-    });
-    if (env == 'production') {
-        //steps.push('ngtemplates');
-    }
     // compile task end
 
 	grunt.registerTask('test', [
@@ -102,23 +110,26 @@ module.exports = function(grunt) {
 		'connect:proxyServer',
 		'karma:unit'
 	]);
-
-    grunt.registerTask('tdd', [
+    grunt.registerTask('tdd_karma', [
 		'ngtemplates',
         'connect:proxyServer',
 		'karma:tdd'
 	]);
+    grunt.registerTask('tdd', ['concurrent:tdd']);
     //Making grunt default to force in order not to break the project.
 //    grunt.option('force', true);
 
     //Default task(s).
-    grunt.registerTask('compile', steps);
+    grunt.registerTask('bundle', [
+        'replace',
+        'exec:bundle'
+    ]);
 
     if (env == 'production') {
-        grunt.registerTask('default', ['compile']);
-        gCfg.watch.JSSources.tasks = ['compile'];
+        grunt.registerTask('default', ['bundle']);
+        gCfg.watch.JSSources.tasks = ['bundle'];
     } else {
-        grunt.registerTask('default', ['compile', 'watch']);
+        grunt.registerTask('default', ['watch']);
     }
 
     grunt.initConfig(gCfg);

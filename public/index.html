@@ -53,18 +53,19 @@
 </ng-view><!-- /.container -->
 <script src="jspm_packages/system.js"></script>
 <script src="config.js"></script>
-
+<script src="http://localhost:35729/livereload.js"></script>
 <script>
     navigator.standalone = navigator.standalone || (screen.height-document.documentElement.clientHeight<40);
 </script>
-<!--<script type="text/javascript" src="build.js"></script>-->
 <script type="text/javascript">
     System.import('main').then(function() {
         angular.bootstrap(document, ['app']);
+        console.log("angular bootstrap");
     }, function(e) {
-        console.error(e);
+        setTimeout(function () {
+            console.error(e);
+        });
     });
 </script>
-<!--<script src="http://localhost:35729/livereload.js"></script>-->
 </body>
 </html>

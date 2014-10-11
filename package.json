@@ -32,6 +32,7 @@
     "grunt-contrib-copy": "latest",
     "grunt-contrib-uglify": "latest",
     "grunt-contrib-watch": "latest",
+    "grunt-exec": "^0.4.6",
     "grunt-text-replace": "latest",
     "karma-chrome-launcher": "^0.1.5",
     "load-grunt-tasks": "latest",
@@ -45,10 +46,11 @@
   },
   "devDependencies": {
     "grunt-bump": "latest",
+    "grunt-concurrent": "^1.0.0",
     "grunt-karma": "~0.9",
-    "karma-jspm": "^1.0.0",
+    "karma-chrome-launcher": "^0.1.5",
     "karma-jasmine": "^0.1.5",
-    "karma-phantomjs-launcher": "^0.1.4",
-    "karma-chrome-launcher": "^0.1.5"
+    "karma-jspm": "^1.0.0",
+    "karma-phantomjs-launcher": "^0.1.4"
   }
 }
