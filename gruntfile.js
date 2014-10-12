@@ -11,7 +11,7 @@ module.exports = function(grunt) {
     var mainFile = 'public/main.js';
 
 	var pathToCss = 'built/<%= pkg.name %>-<%= pkg.version %>.min.css';
-	var debugBundlePath = '/built/<%= pkg.name %>.js';
+	var bundlePath = '/built/build.js';
 
 	var gCfg = {
 		pkg: pkgJSON,
@@ -28,7 +28,7 @@ module.exports = function(grunt) {
 			},
 			less: {
 				files: 'public/**/*.less',
-				tasks: ['less']
+				tasks: ['less:development']
 			},
 			replace: {
 				files: 'public/index_build_template.html',
@@ -56,13 +56,43 @@ module.exports = function(grunt) {
         replace: {
             production: {
                 src: 'public/index.html',
-                dest: 'public/index.html',
+                overwrite: true,
                 replacements: [
                     {
                         from: '<script src="http://localhost:35729/livereload.js"></script>',
-                        to: '<script src="build.js"></script>'
+                        to: bundlePath
                     }
                 ]
+            },
+            style: {
+                src: 'public/index.html',
+                overwrite: true,
+                replacements: [
+                    {
+                        from: /<link rel="stylesheet" href="\/built\/(.+).css">/g,
+                        to: '<script src="/built/<%= pkg.name %>.js"></script>'
+                    }
+                ]
+            }
+        },
+        less: {
+            development: {
+                options: {
+                    sourceMap: true,
+                    sourceMapBasepath: 'public', // Sets sourcemap base path, defaults to current working directory.
+                    sourceMapRootpath: '/' // adds this path onto the sourcemap filename and less file paths
+                },
+                src:  './public/less/bootstrap.less',
+                dest: './public/all/<%= pkg.name %>.css'
+            },
+            production: {
+                options: {
+                    compress: true,
+                    yuicompress: true,
+                    report: 'min'
+                },
+                src:  './public/less/bootstrap.less',
+                dest: './public/built/<%= pkg.name %>.min.css'
             }
         },
 		ngtemplates:  {
@@ -88,7 +118,7 @@ module.exports = function(grunt) {
         },
         exec:{
             bundle:{
-                cmd: 'jspm bundle main',
+                cmd: 'jspm bundle main built/build.js',
                 cwd: './public'
             }
         },
@@ -126,7 +156,7 @@ module.exports = function(grunt) {
     ]);
 
     if (env == 'production') {
-        grunt.registerTask('default', ['bundle']);
+        grunt.registerTask('default', ['less:production', 'bundle']);
         gCfg.watch.JSSources.tasks = ['bundle'];
     } else {
         grunt.registerTask('default', ['watch']);
