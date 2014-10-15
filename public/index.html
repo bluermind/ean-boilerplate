@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <base href="http://localhost:8050/">
     <title></title>
-    <link rel="stylesheet" href="/built/<--pkgName-->.css">
+    <link rel="stylesheet" href="/built/all.css">
     <!--[if lte IE 9]>
     <link rel="shortcut icon" href="/img/icons/favicon.ico">
     <![endif]-->
@@ -53,7 +53,7 @@
 </ng-view><!-- /.container -->
 <script src="jspm_packages/system.js"></script>
 <script src="config.js"></script>
-<script src="http://localhost:35729/livereload.js"></script>
+<script type="text/javascript" src="/built/build.js"></script>
 <script>
     navigator.standalone = navigator.standalone || (screen.height-document.documentElement.clientHeight<40);
 </script>

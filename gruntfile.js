@@ -15,6 +15,7 @@ module.exports = function(grunt) {
 
 	var gCfg = {
 		pkg: pkgJSON,
+        clean: ["public/built/build.js"],
 		watch: {
 			options: {
                 interrupt: true,
@@ -53,28 +54,6 @@ module.exports = function(grunt) {
                 singleRun: false
             }
         },
-        replace: {
-            production: {
-                src: 'public/index.html',
-                overwrite: true,
-                replacements: [
-                    {
-                        from: '<script src="http://localhost:35729/livereload.js"></script>',
-                        to: bundlePath
-                    }
-                ]
-            },
-            style: {
-                src: 'public/index.html',
-                overwrite: true,
-                replacements: [
-                    {
-                        from: /<link rel="stylesheet" href="\/built\/(.+).css">/g,
-                        to: '<script src="/built/<%= pkg.name %>.js"></script>'
-                    }
-                ]
-            }
-        },
         less: {
             development: {
                 options: {
@@ -83,7 +62,7 @@ module.exports = function(grunt) {
                     sourceMapRootpath: '/' // adds this path onto the sourcemap filename and less file paths
                 },
                 src:  './public/less/bootstrap.less',
-                dest: './public/all/<%= pkg.name %>.css'
+                dest: './public/built/all.css'
             },
             production: {
                 options: {
@@ -92,7 +71,7 @@ module.exports = function(grunt) {
                     report: 'min'
                 },
                 src:  './public/less/bootstrap.less',
-                dest: './public/built/<%= pkg.name %>.min.css'
+                dest: './public/built/all.gruntcss'
             }
         },
 		ngtemplates:  {
@@ -151,7 +130,6 @@ module.exports = function(grunt) {
 
     //Default task(s).
     grunt.registerTask('bundle', [
-        'replace',
         'exec:bundle'
     ]);
 
@@ -159,7 +137,7 @@ module.exports = function(grunt) {
         grunt.registerTask('default', ['less:production', 'bundle']);
         gCfg.watch.JSSources.tasks = ['bundle'];
     } else {
-        grunt.registerTask('default', ['watch']);
+        grunt.registerTask('default', ['clean','less:development', 'watch']);
     }
 
     grunt.initConfig(gCfg);

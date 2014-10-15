@@ -34,7 +34,9 @@ app.use(require('method-override')()); 					// simulate DELETE and PUT
 
 var port = process.env.PORT || pjson.port;
 var server = app.listen(port, function () {
-
+    app.get('/config.js', function(req, res) {
+       res.sendFile('config.js', {root:'./'});  //JSPM config file for frontend
+    });
     app.get('*', function(req, res){
         var pathName = req._parsedUrl.pathname;
 

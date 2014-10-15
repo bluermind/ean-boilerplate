@@ -13,7 +13,8 @@
   },
   "scripts": {
     "start": "node node_modules/grunt-cli/bin/grunt",
-    "test": "node node_modules/grunt-cli/bin/grunt test"
+    "test": "node node_modules/grunt-cli/bin/grunt test",
+    "postinstall": "jspm install"
   },
   "env": "development",
   "port": 8050,
@@ -33,7 +34,7 @@
     "grunt-contrib-uglify": "latest",
     "grunt-contrib-watch": "latest",
     "grunt-exec": "^0.4.6",
-    "grunt-text-replace": "latest",
+    "grunt-contrib-clean": "latest",
     "karma-chrome-launcher": "^0.1.5",
     "load-grunt-tasks": "latest",
     "lodash": "latest",
@@ -53,5 +54,20 @@
     "karma-jspm": "^1.0.0",
     "karma-phantomjs-launcher": "^0.1.4",
     "grunt-contrib-less": "^0.11.4"
+  },
+  "jspm": {
+    "name": "ean-boilerplate",
+    "directories": {
+      "dist": "built",
+      "baseURL": "public"
+    },
+    "configFile": "config.js",
+    "dependencies": {
+      "moment": "^2.8.3",
+      "angular": "^1.3.0",
+      "github:capaj/angular-moment": "^0.8.3",
+      "jquery": "^2.1.1",
+      "angular-mocks": "^1.3.0-rc.5"
+    }
   }
 }

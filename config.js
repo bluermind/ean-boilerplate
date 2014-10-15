@@ -38,7 +38,7 @@ System.config({
     "github:systemjs/plugin-text": "0.0.2",
     "github:jspm/nodelibs": "0.0.3",
     "github:moment/moment": "2.8.3",
-    "github:angular/bower-angular": "1.3.0-rc.5",
+    "github:angular/bower-angular": "1.3.0",
     "npm:base64-js": "0.0.7",
     "npm:inherits": "2.0.1",
     "npm:ieee754": "1.1.4",
@@ -46,7 +46,7 @@ System.config({
     "github:systemjs/plugin-json": "master",
     "github:capaj/angular-moment": "0.8.3",
     "github:components/jquery": "2.1.1",
-    "github:angular/bower-angular-mocks": "1.3.0-rc.5"
+    "github:angular/bower-angular-mocks": "1.3.0"
   }
 });
 
