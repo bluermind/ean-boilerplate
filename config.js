@@ -12,7 +12,7 @@ System.config({
     "lodash": "npm:lodash-node@2.4.1",
     "text": "github:systemjs/plugin-text@^0.0.2",
     "moment": "github:moment/moment@^2.8.3",
-    "angular": "github:angular/bower-angular@^1.3.0-rc.5",
+    "angular": "github:angular/bower-angular@^1.3.0",
     "npm:base64-js@0.0.7": {},
     "npm:inherits@2.0.1": {},
     "npm:ieee754@1.1.4": {},
@@ -28,7 +28,7 @@ System.config({
     "angular-moment": "github:capaj/angular-moment@^0.8.2",
     "github:capaj/angular-moment": "github:capaj/angular-moment@^0.8.3",
     "jquery": "github:components/jquery@^2.1.1",
-    "angular-mocks": "github:angular/bower-angular-mocks@^1.3.0-rc.5"
+    "angular-mocks": "github:angular/bower-angular-mocks@^1.3.0"
   }
 });
 
