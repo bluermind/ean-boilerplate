@@ -51,7 +51,7 @@
     "grunt-karma": "~0.9",
     "karma-chrome-launcher": "^0.1.5",
     "karma-jasmine": "^0.1.5",
-    "karma-jspm": "^1.0.0",
+    "karma-jspm": "^1.0.1",
     "karma-phantomjs-launcher": "^0.1.4",
     "grunt-contrib-less": "^0.11.4"
   },

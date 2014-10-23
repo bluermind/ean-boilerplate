@@ -20,13 +20,13 @@ module.exports = function(config) {
 				'test/unit/**/*.js'
 			],
 			serveFiles: ['public/**'],
-			config: "public/config.js",
+			config: "config.js",
 			packages: "public/jspm_packages"
 		},
 		// list of files / patterns to exclude
 		exclude: ['public/**/build.js'],
 		proxies: {
-			'/base': 'http://localhost:8077/'
+			'/base/': 'http://localhost:8077/'
 		},
 		// web server port
 		port: 8067,
