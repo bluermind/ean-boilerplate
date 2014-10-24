@@ -17,5 +17,6 @@ module.exports = angular.module('app',
 
         $routeProvider.otherwise({redirectTo:'/404'});
     }
-);
-
+).config(function ($compileProvider) {
+    //$compileProvider.debugInfoEnabled(false);
+});
