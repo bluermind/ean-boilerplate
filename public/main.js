@@ -15,6 +15,7 @@ require('./js/bootstrap/modal');
 require('./js/bootstrap/scrollspy');
 require('./js/bootstrap/tab');
 require('./js/bootstrap/tooltip');
+require('./js/bootstrap/popover');
 require('./js/bootstrap/transition');
 require('./js/controllers/root-ctrl');
 require('./js/directives/dummy');

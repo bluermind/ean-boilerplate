@@ -2,7 +2,7 @@
 
 EAN is a boilerplate that provides a nice starting point for [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), and [AngularJS](http://angularjs.org/) based applications. It is designed to give you quick and organized way to start developing of MEAN based web apps with useful modules like mongoose and passport pre-bundled and configured. We mainly try to take care of the connection points between existing popular frameworks and solve common integration problems.
 ## Philosophy
-Opinionated stack perfect for building large and small angular apps
+Opinionated stack perfect for building large and small angular apps with Node.js on the backend.
 
 ### Target browsers
 * this stack targets anything newer than IE9, inluding IE9. If you need to run on IE8 or older, this boilerplate is not for you.
@@ -15,10 +15,10 @@ angular-touch and angular-gestures to make mobile experience that much better
 
 ### Global packages Prerequisites
 
-* Bower - Web package manager, installing [Bower](http://bower.io/) is simple when you have npm:
+* jspm -package manager, installing [jspm](http://jspm.io/) is simple when you have npm:
 
 ```
-$ npm install -g bower
+$ npm install -g jspm
 ```
 * [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) - JavaScript Task Runner, download and install [Grunt](http://gruntjs.com) also through npm :
 
@@ -30,7 +30,7 @@ $ npm install -g grunt-cli
 * Express - Defined as npm module in the [package.json](package.json) file.
 * AngularJS - Defined as bower module in the [bower.json](bower.json) file.
 * Twitter Bootstrap - Included in the project, because we want to be able to overwrite it easily.
-* UI Bootstrap - Defined as bower module in the [bower.json](bower.json) file.
+* UI Bootstrap - Included with whole source, so that you can easily modify the less files
 
 ## Build enviroment
 There are two preset build environments: "dev", "production"
@@ -56,7 +56,7 @@ Which one is used for build determines the "env" field in package.json.
   ```
   http://localhost:8080
   ```
-  8080 is default port specified in config-dev.json
+  8050 is default port specified in config-dev.json
 
 
 ## Troubleshooting
@@ -78,21 +78,16 @@ $ npm update -g grunt-cli
 
 Updating Bower:
 ```
-$ npm update -g bower
+$ npm update -g jspm
 ```
 
 #### Cleaning NPM and Bower cache
-NPM and Bower has a caching system for holding packages that you already installed.
+NPM has a caching system for holding packages that you already installed.
 We found that often cleaning the cache solves some troubles this system creates.
 
 NPM Clean Cache:
 ```
 $ npm cache clean
-```
-
-Bower Clean Cache:
-```
-$ bower cache clean
 ```
 
 ### Environmental Settings

@@ -21,6 +21,10 @@ if (env === 'production') {
     }));
 
     require('./server/sitemap_from_routes')(app, 'http://localhost:8080');  //simple sitemap generated from angular routes definition
+} else {
+    app.use(require('connect-livereload')({
+        port: 35729
+    }));
 }
 
 app.use(require('static-favicon')());
